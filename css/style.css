@@ -103,3 +103,10 @@ footer{background:#06280e;color:#cfe3d5;padding:34px 0 20px;font-size:14px}foote
 .pop-box .full{display:flex;width:100%;margin-top:12px}
 .pop-alt{margin-top:10px}.pop-alt .btn{flex:1 1 140px;padding:11px 12px;font-size:15px}
 .pop-x{position:absolute;top:6px;right:10px;border:0;background:none;font-size:30px;line-height:1;cursor:pointer;color:#555}
+/* Khối mã QR Zalo (28/10/2026): máy tính hiện mã QR, điện thoại hiện nút mở Zalo */
+.zqr{display:flex;gap:14px;align-items:center;background:#fff;color:#14261a;border-radius:14px;padding:12px 14px;margin:14px 0;max-width:440px;box-shadow:0 2px 10px rgba(0,0,0,.08)}
+.zqr img{width:150px;height:auto;flex:none}
+.zqr b{display:block;font-size:16px;margin-bottom:4px;color:#14261a}.zqr p{margin:0 0 8px;font-size:13.5px;color:#4a5a4f}
+.zqr .zqr-btn{background:#0068ff;color:#fff!important;border:0}
+.zqr .zqr-mb{display:none}
+@media(max-width:899px){.zqr .zqr-pc{display:none}.zqr .zqr-mb{display:inline}.zqr{padding:12px}}

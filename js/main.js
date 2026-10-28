@@ -31,3 +31,12 @@
     sels.forEach(function(s){s.addEventListener('change',f);});f();
   }
 })();
+// Nút Zalo (z.html, đếm lượt bấm): gắn trang hiện tại + utm/nguồn vào link (28/10/2026)
+(function(){try{var S=sessionStorage,q=new URLSearchParams(location.search),m={us:'utm_source',um:'utm_medium',uc:'utm_campaign',ux:'utm_content'},k;
+  for(k in m)if(q.get(m[k]))S.setItem('zl_'+k,q.get(m[k]).slice(0,100));
+  var r=document.referrer;if(r&&!S.getItem('zl_ref')){try{if(new URL(r).host!==location.host)S.setItem('zl_ref',r.slice(0,200));}catch(e){}}
+  var tr=location.pathname.split('/').pop()||'index.html';
+  document.querySelectorAll('a[href^="z.html"]').forEach(function(a){var u=a.getAttribute('href')+'&tr='+encodeURIComponent(tr);
+    for(var k in m){var v=S.getItem('zl_'+k);if(v)u+='&'+k+'='+encodeURIComponent(v);}
+    var f=S.getItem('zl_ref');if(f)u+='&ref='+encodeURIComponent(f);a.setAttribute('href',u);});
+}catch(e){}})();
