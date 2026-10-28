@@ -310,7 +310,7 @@ footer .chu-to{font-weight:900;font-size:clamp(46px,13vw,150px);line-height:.85;
 </style>
 <style>/* che do nhung trong website chinh */
 html.nhung body{min-height:0}
-html.nhung #login{min-height:600px}
+html.nhung #login{min-height:560px}
 html.nhung header{position:static}
 html.nhung header .top .logo{visibility:hidden}
 html.nhung .thanh-tab{position:static}
@@ -318,6 +318,34 @@ html.nhung footer{display:none}
 html.nhung body.bt{overflow:visible}
 html.nhung body.bt>*:not(#bt){display:none!important}
 html.nhung #bt{position:static;min-height:600px}
+</style>
+<style>/* giao dien SANG khi nhung trong website (28/10/2026) */
+html.nhung{--san:#f6f8f1;--san1:#fff;--san2:#fff;--san3:#eef5ea;--vien:rgba(8,56,26,.15);--vien2:rgba(8,56,26,.3);--chanh:#0E5A2A;--chu:#14231a;--mo:#465b4e;--mo2:#566a5d;--do:#b3261e;--len:#1d7a3f;--toi:#fff;--vang:#7a5600;--kim:linear-gradient(180deg,#c8901a 0%,#9a6508 60%,#7a4f00 100%)}
+html.nhung body{background:var(--san);color:var(--chu);background-image:none}
+html.nhung .hero,html.nhung .the:has(.vong,.radar,.bieu-do){--san:#052e18;--san1:#073a1f;--san2:#0b4727;--san3:#105a33;--vien:rgba(255,255,255,.13);--vien2:rgba(255,255,255,.22);--chanh:#E6F53A;--chu:#fff;--mo:#b9d2c1;--mo2:#8fb09b;--do:#ff9b8c;--len:#86f0a3;--toi:#06210f;--vang:#F6C445;--kim:linear-gradient(180deg,#fff6c2 0%,#f8d35a 38%,#c8901a 58%,#ffe48a 100%);color:#fff}
+html.nhung .the:has(.vong,.radar,.bieu-do){background:#0b4727}
+html.nhung #login{background:radial-gradient(600px 400px at 50% 0%,rgba(31,163,74,.12),transparent 70%),var(--san)}
+html.nhung .hop{box-shadow:0 10px 30px -12px rgba(8,56,26,.25)}
+html.nhung .tab-dn{background:#eef3ec}
+html.nhung .nut-dn,html.nhung .btn:not(.phu),html.nhung .kq-bt .muc-to{background:#FFD200;color:#06210f}
+html.nhung .tab-dn button.on,html.nhung nav a.on,html.nhung .tabs button.on,html.nhung .doan button.on{background:#0E5A2A;color:#fff;border-color:#0E5A2A}
+html.nhung .o-mk input,html.nhung .o-tim input,html.nhung .form input,html.nhung .lc select{background:#fff;color:var(--chu)}
+html.nhung .o-mk input::placeholder,html.nhung .o-tim input::placeholder,html.nhung .form input::placeholder{color:#5f7366}
+html.nhung header{background:rgba(255,255,255,.97);border-bottom-color:var(--vien)}
+html.nhung .thanh-tab{background:rgba(246,248,241,.97)}
+html.nhung .tran .meta b,html.nhung .them,html.nhung .nut-phu,html.nhung .bt-dau button,html.nhung .lc button,html.nhung .btn.phu,html.nhung .tag,html.nhung .mo-bt,html.nhung .bac.on small{color:var(--chu)}
+html.nhung .tag,html.nhung .tag.xong,html.nhung .tag.nghi,html.nhung .tag.chua{background:rgba(8,56,26,.08)}
+html.nhung .tag.sap{background:#0E5A2A;color:#fff}
+html.nhung .hero .tag,html.nhung .hero .tag.xong{background:rgba(255,255,255,.12)}html.nhung .hero .tag.sap{background:#E6F53A;color:#06210f}
+html.nhung .tag.mau{color:#9b2c1f;background:rgba(220,80,60,.12)}html.nhung .tag.vuot{color:#1e4f9c;background:rgba(60,110,220,.12)}
+html.nhung .canh{color:#4a3800;background:#fff8e1;border-color:#e9c766}
+html.nhung .lua{background:#fff;box-shadow:0 4px 14px rgba(8,56,26,.08)}html.nhung .lua .ns{color:var(--mo)}
+html.nhung .bvd .v1 .ten{color:#7a5600}html.nhung .bac.qua i{background:#e6f2e9}
+html.nhung .thanh,html.nhung .tru .bar,html.nhung .bt-tien,html.nhung .so-hang{background:rgba(8,56,26,.1)}
+html.nhung th,html.nhung .cap .m{background:#eef5ea;color:#2f4a38}
+html.nhung .ts{background:#eef5ea;color:#0E5A2A}
+html.nhung .tran,html.nhung .the,html.nhung .bang-wrap,html.nhung .cap,html.nhung .hang-hv,html.nhung .nb-the,html.nhung .thang div{box-shadow:0 3px 12px rgba(8,56,26,.07)}
+html.nhung .tran.le{background:#fffaf0;border-color:#ecd28a}
 </style>
 </head>
 <body class="khoa">
