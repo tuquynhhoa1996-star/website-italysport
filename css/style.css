@@ -118,3 +118,22 @@ footer .zqr img{width:118px}footer .zqr b{font-size:15px}footer .zqr .zqr-btn{pa
 .s-app{padding-top:18px}
 .appwrap{border-radius:16px;overflow:hidden;background:#052e18;box-shadow:0 6px 24px rgba(0,0,0,.18)}
 .app-nhung{display:block;width:100%;border:0;min-height:420px}
+/* bang chuyen cam nhan phu huynh (28/10/2026) */
+.tm{position:relative}
+.tm-track{display:flex;gap:16px;overflow-x:auto;scroll-snap-type:x mandatory;padding:6px 2px 14px;scrollbar-width:thin;-webkit-overflow-scrolling:touch}
+.tm-track:focus{outline:2px solid var(--g);outline-offset:2px}
+.tm-card{flex:0 0 86%;scroll-snap-align:start;margin:0;background:#fff;border:1px solid #e3ebe5;border-radius:var(--r);box-shadow:0 2px 14px rgba(11,93,30,.09);padding:18px;display:flex;flex-direction:column;min-width:0}
+@media(min-width:700px){.tm-card{flex-basis:calc(50% - 8px)}}
+@media(min-width:1000px){.tm-card{flex-basis:calc(33.333% - 11px)}}
+.tm-top{display:flex;align-items:center;justify-content:space-between;gap:10px}
+.tm-av{width:46px;height:46px;border-radius:50%;color:#fff;font-weight:900;font-size:20px;display:flex;align-items:center;justify-content:center;flex:0 0 46px}
+.tm-src{background:#e7f6ec;color:var(--gd);font-size:12px;font-weight:800;border-radius:999px;padding:3px 10px;white-space:nowrap}
+.tm-star{color:#F5A400;font-size:18px;letter-spacing:2px;margin:10px 0 4px}.tm-star span{color:#d9dfdb}
+.tm-nostar{color:var(--mut);font-size:12px;letter-spacing:0;font-weight:600}
+.tm-card blockquote{margin:6px 0 12px;font-style:italic;font-size:16px;line-height:1.55;flex:1;overflow-wrap:anywhere}
+.tm-card figcaption{font-weight:700;color:var(--gd);font-size:14px;border-top:1px dashed #d5e3d9;padding-top:10px}
+.tm-btn{position:absolute;top:42%;z-index:2;width:40px;height:40px;border-radius:50%;border:0;background:var(--gd);color:#fff;font-size:26px;line-height:1;cursor:pointer;box-shadow:0 2px 10px rgba(0,0,0,.2);display:none}
+.tm-prev{left:-14px}.tm-next{right:-14px}
+@media(min-width:700px){.tm-btn{display:block}}
+.tm-note{font-size:13px;color:var(--mut);margin:6px 0 0}
+@media(max-width:699px){.ks-num{grid-template-columns:1fr 1fr;gap:10px}.ks-num .in{padding:12px}.ks-num p{font-size:14px;margin:4px 0 0}.ks-num .price{font-size:24px}}

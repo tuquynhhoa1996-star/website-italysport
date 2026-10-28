@@ -56,3 +56,11 @@
   }catch(e){}});
   setInterval(fit,700);
 })();
+
+// bang chuyen cam nhan phu huynh: nut truoc/sau cuon dung 1 the
+document.querySelectorAll("[data-tm]").forEach(function (b) {
+  var t = b.querySelector(".tm-track");
+  function step(d) { var c = t.querySelector(".tm-card"); t.scrollBy({ left: d * (c ? c.getBoundingClientRect().width + 16 : 300), behavior: "smooth" }); }
+  b.querySelector(".tm-prev").addEventListener("click", function () { step(-1); });
+  b.querySelector(".tm-next").addEventListener("click", function () { step(1); });
+});
