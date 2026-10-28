@@ -40,3 +40,19 @@
     for(var k in m){var v=S.getItem('zl_'+k);if(v)u+='&'+k+'='+encodeURIComponent(v);}
     var f=S.getItem('zl_ref');if(f)u+='&ref='+encodeURIComponent(f);a.setAttribute('href',u);});
 }catch(e){}})();
+
+// Khung nhúng mục Giải đấu / Điểm năng lực (hoc-vien/, 28/10/2026): giữ hash của trang (link sâu), tự chỉnh chiều cao, đồng bộ hash ngược lên thanh địa chỉ.
+(function(){
+  var f=document.querySelector('iframe.app-nhung');if(!f)return;
+  var h=location.hash&&location.hash.length>2?location.hash:f.getAttribute('data-hash');
+  f.src=f.getAttribute('data-src')+h;
+  function fit(){try{var d=f.contentDocument;if(!d||!d.body)return;var b=d.body,cs=d.defaultView.getComputedStyle(b);
+    var hh=Math.ceil(b.getBoundingClientRect().height+parseFloat(cs.marginTop)+parseFloat(cs.marginBottom));
+    if(hh>200&&Math.abs(f.offsetHeight-hh)>2)f.style.height=hh+'px';}catch(e){}}
+  f.addEventListener('load',function(){fit();try{var w=f.contentWindow;
+    if(w.ResizeObserver)new w.ResizeObserver(fit).observe(w.document.body);
+    w.addEventListener('hashchange',function(){try{history.replaceState(null,'',location.pathname+location.search+w.location.hash);}catch(e){}
+      var t=f.getBoundingClientRect().top;if(t<0)window.scrollTo(0,window.scrollY+t-80);setTimeout(fit,60);});
+  }catch(e){}});
+  setInterval(fit,700);
+})();
