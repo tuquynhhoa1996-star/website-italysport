@@ -110,3 +110,4 @@ footer{background:#06280e;color:#cfe3d5;padding:34px 0 20px;font-size:14px}foote
 .zqr .zqr-btn{background:#0068ff;color:#fff!important;border:0}
 .zqr .zqr-mb{display:none}
 @media(max-width:899px){.zqr .zqr-pc{display:none}.zqr .zqr-mb{display:inline}.zqr{padding:12px}}
+footer .zqr img{width:118px}footer .zqr b{font-size:15px}footer .zqr .zqr-btn{padding:9px 14px;font-size:14px}
