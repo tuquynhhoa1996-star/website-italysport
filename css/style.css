@@ -204,3 +204,15 @@ footer.co-anh{background-color:#06280e;background-image:linear-gradient(180deg,r
 @media(min-width:900px){.pagehead.co-anh{min-height:360px}.pagehead.co-anh:after{background:linear-gradient(90deg,rgba(5,30,12,.93) 0%,rgba(11,93,30,.8) 40%,rgba(11,93,30,.2) 75%,rgba(11,93,30,.05) 100%)}.pagehead.co-anh .wrap>*{max-width:620px}}
 .s.dark .card,.s.dark .tm-card{color:var(--ink)}.s.dark .card p{color:var(--mut)}
 .hero.co-anh:before{background:linear-gradient(180deg,rgba(11,93,30,.3) 0%,rgba(11,93,30,.72) 30%,rgba(6,40,14,.9) 60%,rgba(6,40,14,.96) 100%)}
+/* Cam nhan phu huynh dang the tin nhan (28/10/2026, hoc theo web 4YOU) */
+.ph-list{align-items:start}
+.ph{margin:0;background:#fff;color:var(--ink);border-radius:18px;padding:18px 18px 20px;box-shadow:0 4px 18px rgba(14,90,42,.08);border-top:4px solid var(--g);min-width:0}
+.ph-top{display:flex;align-items:center;gap:12px;margin-bottom:12px}
+.ph-av{width:50px;height:50px;flex:0 0 50px;border-radius:50%}
+.ph-who{min-width:0;line-height:1.35}.ph-who b{display:block;color:var(--gd);font-size:15px;overflow-wrap:anywhere}.ph-who span{display:block;color:var(--mut);font-size:12.5px;font-weight:600}
+.ph blockquote{margin:0;background:#eef7f0;border-radius:4px 16px 16px 16px;padding:13px 15px;font-size:16px;line-height:1.6;font-weight:500;overflow-wrap:anywhere}
+.ph blockquote:before{content:"\201C";color:var(--g);font-size:40px;font-weight:900;line-height:0;vertical-align:-16px;margin-right:4px}
+.s.dark .ph{box-shadow:0 8px 24px rgba(0,0,0,.25);border-top-color:var(--y)}
+.ks-num{grid-template-columns:repeat(5,1fr)}
+@media(max-width:999px){.ks-num{grid-template-columns:repeat(3,1fr)}}
+@media(max-width:699px){.ks-num{grid-template-columns:1fr 1fr}.ks-num .card:last-child{grid-column:1/-1}}
