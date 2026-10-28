@@ -137,3 +137,30 @@ footer .zqr img{width:118px}footer .zqr b{font-size:15px}footer .zqr .zqr-btn{pa
 @media(min-width:700px){.tm-btn{display:block}}
 .tm-note{font-size:13px;color:var(--mut);margin:6px 0 0}
 @media(max-width:699px){.ks-num{grid-template-columns:1fr 1fr;gap:10px}.ks-num .in{padding:12px}.ks-num p{font-size:14px;margin:4px 0 0}.ks-num .price{font-size:24px}}
+/* khung 4 cap nang luc (28/10/2026) */
+.cap-khoi{background:#fff;border:1px solid #e3ebe5;border-radius:var(--r);padding:18px;margin:4px 0 16px;box-shadow:0 2px 14px rgba(11,93,30,.07)}
+.cap-khoi h2{font-size:22px}
+.cap-bac{list-style:none;padding:0;margin:14px 0;display:grid;grid-template-columns:repeat(4,1fr);gap:6px}
+.cap-b{position:relative;background:var(--bg);border:1.5px solid #dbe6de;border-radius:12px;padding:10px 6px;text-align:center;font-size:13px;line-height:1.25}
+.cap-b b{display:block;font-size:15px;color:var(--gd)}.cap-b small{display:block;color:var(--mut);font-size:11.5px;margin-top:2px}
+.cap-b em{display:block;font-style:normal;font-size:11px;font-weight:800;color:var(--gd);background:var(--y);border-radius:999px;margin:6px auto 0;padding:2px 6px;width:max-content}
+.cap-b.on{border-color:var(--gd);background:#eaf5ec}
+.cap-so{display:inline-grid;place-items:center;width:26px;height:26px;border-radius:50%;background:var(--gd);color:#fff;font-weight:800;font-size:13px;margin-bottom:4px}
+.cap-the .card h3{margin-top:6px}.mut{color:var(--mut);font-size:14px}
+.bd{margin:14px 0 6px;padding:0}.bd figcaption{font-weight:800;color:var(--ink);margin-bottom:8px;font-size:15px}
+.bd-truc{display:grid;grid-template-columns:repeat(5,1fr);margin-left:42%;margin-right:36px;font-size:11px;color:var(--mut);text-align:right}
+.bd-r{display:grid;grid-template-columns:42% 1fr 36px;align-items:center;gap:0;min-height:30px}
+.bd-t{font-size:13.5px;padding-right:8px;line-height:1.2}
+.bd-c{position:relative;height:14px;background:repeating-linear-gradient(90deg,transparent 0,transparent calc(20% - 1px),#e3ebe5 calc(20% - 1px),#e3ebe5 20%)}
+.bd-c i{position:absolute;left:0;top:0;bottom:0;background:var(--gd);border-radius:0 4px 4px 0}
+.bd-r:hover .bd-c i{background:var(--g)}
+.bd-v{font-size:13.5px;font-weight:700;text-align:right;color:var(--ink)}
+.bd-bang{margin-top:8px;font-size:14px}.bd-bang table{border-collapse:collapse;margin-top:6px}.bd-bang td,.bd-bang th{border:1px solid #e3ebe5;padding:4px 10px;text-align:left}
+.ds{padding-left:20px}.ds li{margin:6px 0}
+.cap-ct{background:#fff;border:1px solid #e3ebe5;border-radius:12px;padding:12px 14px;margin:12px 0}.cap-ct summary{font-weight:800;color:var(--gd);cursor:pointer}.cap-ct h4{margin:12px 0 4px;color:var(--gd)}
+.bang-cuon{overflow-x:auto;-webkit-overflow-scrolling:touch}
+.bang{border-collapse:collapse;width:100%;min-width:480px;background:#fff;font-size:14px}
+.bang th,.bang td{border:1px solid #e3ebe5;padding:8px 10px;text-align:left;vertical-align:top}.bang thead th{background:var(--gd);color:#fff}
+.bang th small{display:block;font-weight:400;color:var(--mut);font-size:12px}
+.nguon a{word-break:break-all}
+@media(max-width:699px){.cap-bac{grid-template-columns:repeat(2,1fr)}.bd-r{grid-template-columns:46% 1fr 32px}.bd-truc{margin-left:46%;margin-right:32px}}
