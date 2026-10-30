@@ -453,4 +453,14 @@ nav.menu{order:2}
 .gd-bvd,.gd-mvps{display:flex;flex-wrap:wrap;gap:10px}
 .gd-bvd>div{flex:1 1 150px}.gd-mvps>div{flex:1 1 220px}
 
+/* ---- (9b) menu ba gạch mở ra: căn trái đều, mục con thụt đều, chừa chỗ cho thanh liên hệ đáy, Liên hệ không lặp (31/10/2026) ---- */
+@media(max-width:1279px){
+  nav.menu{align-items:stretch;padding:6px 16px 90px;max-height:calc(100dvh - 62px);overflow-y:auto;-webkit-overflow-scrolling:touch}
+  nav.menu>a,nav.menu .dd-a{display:block;text-align:left;padding:13px 4px;border-bottom:1px solid rgba(255,255,255,.14);border-radius:0}
+  nav.menu .dd{display:block}
+  nav.menu .dd-m{margin:0 0 0 14px;padding:0 0 0 12px;border-left:2px solid rgba(255,255,255,.2)}
+  nav.menu .dd-m a{display:block;text-align:left;padding:11px 4px;border-bottom:1px solid rgba(255,255,255,.08);border-radius:0}
+  nav.menu .dd-m a[href="lien-he.html"]{display:none}
+}
+
 /* <<< sua-15-loi */
