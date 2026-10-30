@@ -97,7 +97,7 @@ document.querySelectorAll("[data-tm]").forEach(function (b) {
         f.outerHTML='<div class="ht-ok" role="status"><h3>Đã nhận thông tin của bố mẹ</h3><p>Cảm ơn bố mẹ đã đăng ký học thử cho con. Các bước tiếp theo:</p><ol><li>Trung tâm gọi lại cho bố mẹ trong ngày (giờ hành chính 8:00-17:30) để xếp buổi học thử ở cơ sở gần nhà.</li><li>Bố mẹ nghe máy số lạ giúp trung tâm. Nếu lỡ cuộc gọi, bố mẹ gọi lại hotline <a href="tel:'+HOT.split('|')[0]+'">'+HOT.split('|')[1]+'</a>.</li><li>Ngày học thử, cho con đi giày thể thao, mang nước uống và có mặt trước 10-15 phút.</li></ol></div>';
       }).catch(function(){
         clearTimeout(tm);btn.disabled=false;btn.textContent=tx;ev('loi_form_hoc_thu',{trang:tr});
-        loi('Chưa gửi được thông tin (mạng chậm hoặc lỗi tạm). Thông tin bố mẹ vừa nhập vẫn còn, bố mẹ bấm gửi lại hoặc gọi hotline <a href="tel:'+HOT.split('|')[0]+'">'+HOT.split('|')[1]+'</a>, hoặc <a href="'+REG+'" target="_blank" rel="noopener">điền ở trang học thử</a>.');
+        loi('Chưa gửi được thông tin (mạng chậm hoặc lỗi tạm). Thông tin bố mẹ vừa nhập vẫn còn, bố mẹ bấm gửi lại hoặc gọi hotline <a href="tel:'+HOT.split('|')[0]+'">'+HOT.split('|')[1]+'</a>,.');
       });
     });
   });

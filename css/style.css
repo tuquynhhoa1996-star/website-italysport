@@ -329,3 +329,128 @@ footer.co-anh{background-color:#06280e;background-image:linear-gradient(180deg,r
 .y-ngan{display:grid;gap:14px;align-items:center;background:#fff;border:1px solid #e3ebe5;border-radius:18px;padding:18px}
 .y-anh{width:120px;height:auto;border-radius:14px;justify-self:start}@media(min-width:900px){.y-ngan{grid-template-columns:120px 1fr auto}}
 .y-ngan h2{margin:0 0 6px}.y-ngan p{margin:0}
+
+/* ---------- dot 2 (30/10/2026) ---------- */
+.dot2-so .price{font-size:34px}.dot2-moc{font-size:13px;margin-top:10px}
+.hlv-ph{font-size:14px;color:var(--mut)}
+.dot2-mau{display:grid;gap:14px;background:#fff;border:1px solid #e3ebe5;border-radius:14px;padding:16px;margin-top:10px}
+@media(min-width:800px){.dot2-mau{grid-template-columns:260px 1fr;align-items:center}}
+.dot2-mau-t b{display:block;font-size:22px;margin:8px 0 2px}.dot2-mau-t small{color:var(--mut)}
+.dot2-lk{margin:10px 0 16px}
+.vd-bang td small{display:block;color:var(--mut)}.vd-bang td{padding:8px 6px;text-align:left}
+.reel-ban{margin-top:22px}
+.ph-q{width:38px;height:38px;border-radius:50%;background:var(--gd);color:var(--y);font:900 28px/42px Georgia,serif;text-align:center;flex:none}
+
+.card.p img[src*="hlv-"]{aspect-ratio:3/2!important;height:auto!important;object-fit:cover;object-position:50% 25%!important}
+/* >>> sua-15-loi 31/10/2026 */
+/* Sửa 15 lỗi giao diện (31/10/2026, bảng rà soát của bạn chị Hoa). Chèn vào cuối css/style.css bởi build.py. */
+
+/* ---- (9) menu gom gọn + nút Đăng ký nổi bật ---- */
+.top .wrap{gap:10px}
+nav.menu{margin-left:auto;gap:2px;align-items:center}
+nav.menu .dd{position:relative}
+nav.menu .dd>a.dd-a:after{content:" \25BE";font-size:11px;opacity:.8}
+nav.menu .dd-m{display:none;position:absolute;top:100%;left:0;min-width:200px;background:var(--gd);border-radius:10px;padding:6px;box-shadow:0 10px 26px rgba(0,0,0,.28);flex-direction:column;z-index:70}
+nav.menu .dd-m a{display:block}
+.top-cta{order:3;background:var(--y);color:var(--gd);font-weight:800;font-size:14px;line-height:1;padding:11px 16px;border-radius:999px;text-decoration:none;white-space:nowrap;box-shadow:0 2px 8px rgba(0,0,0,.25)}
+.top-cta .m{display:none}
+.burger{order:4}
+nav.menu{order:2}
+.brand{order:1}
+@media(min-width:1280px){nav.menu .dd:hover .dd-m,nav.menu .dd:focus-within .dd-m{display:flex}nav.menu a{font-size:15px;padding:8px 10px}}
+@media(max-width:1279px){
+  .top-cta{margin-left:auto;font-size:13px;padding:10px 13px}
+  nav.menu{margin-left:0}
+  nav.menu .dd-m{display:flex;position:static;box-shadow:none;background:transparent;padding:0 0 0 16px;min-width:0}
+  nav.menu .dd>a.dd-a:after{content:""}
+}
+@media(max-width:560px){.top-cta .d{display:none}.top-cta .m{display:inline}.brand small{display:none}.brand span{font-size:17px}.top .wrap{padding:0 12px}}
+
+/* ---- (14) thanh liên hệ đáy: biểu tượng Zalo thật, chữ không gãy dòng ---- */
+.dock a span.zi,.dock a span:has(.zi){display:flex;align-items:center;justify-content:center;height:26px}
+.dock a .zi{display:block}
+.dock a.go{flex-direction:row;white-space:nowrap;padding:0 6px}
+.dock a.go span{font-size:14px;display:inline}
+.dock a.go .s{display:none}
+@media(max-width:400px){.dock a.go{font-size:13px}.dock a.go span{font-size:13px}}
+@media(max-width:350px){.dock a.go .l{display:none}.dock a.go .s{display:inline}}
+
+/* ---- (10) lưới không hở ô: mọi hàng cuối được dàn đủ chiều ngang ---- */
+.grid{display:grid;gap:16px;grid-template-columns:minmax(0,1fr)}
+.g4{grid-template-columns:repeat(2,minmax(0,1fr))}
+.g4>:last-child:nth-child(odd){grid-column:1/-1}
+@media(min-width:640px){
+  .g2{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .g2>:last-child:nth-child(odd){grid-column:1/-1}
+  .g3{grid-template-columns:repeat(6,minmax(0,1fr))}
+  .g3>*{grid-column:span 2}
+  .g3>:nth-child(3n+1):nth-last-child(2),.g3>:nth-child(3n+2):last-child{grid-column:span 3}
+  .g3>:nth-child(3n+1):last-child{grid-column:1/-1}
+}
+@media(min-width:900px){
+  .g4{grid-template-columns:repeat(12,minmax(0,1fr))}
+  .g4>*{grid-column:span 3}
+  .g4>:nth-child(4n+1):nth-last-child(2),.g4>:nth-child(4n+2):last-child{grid-column:span 6}
+  .g4>:nth-child(4n+1):nth-last-child(3),.g4>:nth-child(4n+2):nth-last-child(2),.g4>:nth-child(4n+3):last-child{grid-column:span 4}
+  .g4>:nth-child(4n+1):last-child{grid-column:1/-1}
+}
+/* thẻ cuối đứng một mình (đủ chiều ngang): ảnh bên trái, chữ bên phải cho khỏi quá cao */
+@media(min-width:640px){
+  .g3>.card:is(:has(>img),:has(>.gd-ph)):nth-child(3n+1):last-child,.g2>.card:is(:has(>img),:has(>.gd-ph)):last-child:nth-child(odd):not(:only-child){display:grid;grid-template-columns:minmax(0,42%) minmax(0,1fr);align-items:center}
+}
+.gal,.tvm.gal,.gd-album{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+@media(min-width:700px){.gal,.tvm.gal,.gd-album{grid-template-columns:repeat(4,minmax(0,1fr))}}
+
+/* ---- (11) thanh lọc Giải đấu: xuống dòng trên máy tính, cuộn ngang có dấu hiệu còn nút trên điện thoại ---- */
+@media(min-width:900px){.subnav{flex-wrap:wrap;overflow:visible}}
+@media(max-width:899px){
+  .subnav{position:relative;padding-right:34px;-webkit-mask-image:linear-gradient(90deg,#000 calc(100% - 46px),transparent);mask-image:linear-gradient(90deg,#000 calc(100% - 46px),transparent)}
+}
+
+/* ---- (4)(5) thẻ giải đấu cùng một kiểu: có ảnh thật, không có thì khung thương hiệu cùng tỉ lệ ---- */
+.gd-the{overflow:hidden}
+.gd-ph{aspect-ratio:3/2;width:100%;display:flex;align-items:center;justify-content:center;gap:14px;color:#fff;background:linear-gradient(135deg,#0B5D1E 0%,#12B24A 100%)}
+.gd-ph img{width:auto;height:54px;display:block}.gd-ph b{font-size:30px;letter-spacing:.5px;text-shadow:0 2px 8px rgba(0,0,0,.3)}
+.tt-the .card>img,.tt-the .card>.gd-ph{aspect-ratio:2/1;width:100%;object-fit:cover}
+.tt-the .nguon{font-size:13px;color:var(--mut);margin:8px 0 0}
+
+/* ---- (1)(2)(3)(12) trang chủ: khối đầu ~1 màn hình, ảnh nét, giới thiệu + nút đăng ký ngay trên màn đầu ---- */
+/* khung ảnh/chữ chia đôi do anh_web.STYLE điều khiển (điện thoại: ảnh trên, chữ dưới; máy tính: chữ trái, ảnh phải), ở đây chỉ chỉnh chữ */
+.hero.hero1 .wrap{padding-top:0;padding-bottom:30px}
+.hero.hero1 h1{font-size:clamp(27px,7vw,34px);margin:.3em 0 .35em;line-height:1.18}
+@media(min-width:900px){.hero.hero1{min-height:min(620px,calc(100svh - 70px));align-items:center}.hero.hero1 .wrap{padding-top:36px;padding-bottom:36px}.hero.hero1 h1{font-size:clamp(32px,3.3vw,44px)}}
+.hero.hero1 .hero-sub{font-size:clamp(15px,2.2vw,17px);margin:0 0 14px;color:#f3faf4;line-height:1.5}
+.hero.hero1 .stats{margin:14px 0 4px}.hero.hero1 .stats div{padding:6px 12px}.hero.hero1 .stats b{font-size:18px}
+.hero.hero1 .cta-row{margin:0}
+.vsec{background:#f6f8f5}
+.vsec .vgrid{display:grid;gap:18px;grid-template-columns:minmax(0,1fr);align-items:center}
+.vsec .vframe{aspect-ratio:9/16;max-height:520px}
+@media(min-width:900px){.vsec .vgrid{grid-template-columns:300px minmax(0,1fr);gap:40px}.vsec .vframe{max-height:520px}}
+
+/* ---- "Vì sao chọn" gọn hơn trên điện thoại ---- */
+@media(max-width:639px){
+  .grid.g3:has(.why){grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+  .why .in{padding:12px}.why .in h3{font-size:15px;margin:4px 0}.why .in p{font-size:13.5px;line-height:1.4;margin:0}.why .ico{font-size:22px}
+}
+.ht-khoi{scroll-margin-top:70px}
+
+/* ---- trang chủ gọn trên điện thoại: dãy thẻ cuộn ngang, còn lộ mép thẻ kế bên ---- */
+@media(max-width:639px){
+  .hs{display:flex!important;overflow-x:auto;scroll-snap-type:x mandatory;gap:12px;padding:2px 2px 10px;-webkit-overflow-scrolling:touch}
+  .hs>*{flex:0 0 84%;scroll-snap-align:start;grid-column:auto!important;min-width:0}
+  .dot2-so .in{padding:10px 12px}.dot2-so .price{font-size:26px!important}.dot2-so p{font-size:13px;margin:2px 0 0}
+}
+
+/* danh sách giải gọn trên điện thoại: ảnh nhỏ bên trái, chữ bên phải */
+@media(max-width:639px){
+  .gd-the{display:grid!important;grid-template-columns:112px minmax(0,1fr);align-items:stretch}
+  .gd-the>img,.gd-the>.gd-ph{aspect-ratio:auto!important;height:100%!important;min-height:112px;width:100%;object-fit:cover}
+  .gd-ph{flex-direction:column;gap:6px}.gd-ph img{height:34px}.gd-ph b{font-size:17px}
+  .gd-the .in{padding:10px 12px}.gd-the h3{font-size:16px;margin:4px 0}.gd-the .pill{display:none}.gd-the .gd-di{margin-top:6px}
+}
+
+/* podium và danh sách MVP: hàng cuối tự giãn cho đủ chiều ngang, không hở ô */
+.gd-bvd,.gd-mvps{display:flex;flex-wrap:wrap;gap:10px}
+.gd-bvd>div{flex:1 1 150px}.gd-mvps>div{flex:1 1 220px}
+
+/* <<< sua-15-loi */
