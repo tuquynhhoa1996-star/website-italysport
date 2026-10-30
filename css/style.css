@@ -288,3 +288,44 @@ footer.co-anh{background-color:#06280e;background-image:linear-gradient(180deg,r
 .tt-ic{font-size:26px;line-height:1}.tt-d b{display:block;font-size:16px}
 .tt-g,.tt-doi{display:block;font-size:14px;color:var(--mut);margin-top:3px}.tt-cap{font-weight:800;color:var(--gd)}
 .tt-ng{font-size:13px;font-weight:700}
+
+/* nang cap dot 1 (30/10/2026): lo trinh chuyen cap, doan tuoi, form hoc thu, khoi thay Y */
+.lt{background:#fff;border:1px solid #e3ebe5;border-radius:18px;padding:20px 16px;margin:0 0 22px}
+.lt h2{margin-top:0}
+.lt-hang{margin:16px 0}.lt-nhan b{display:block;font-size:17px;color:var(--gd)}.lt-nhan span{font-size:14px;color:var(--mut)}
+.lt-day{list-style:none;margin:10px 0 0;padding:0;display:grid;gap:22px;grid-template-columns:1fr}
+.lt-o{position:relative;background:#f1f8f3;border:2px solid #cfe6d6;border-radius:14px;padding:12px 14px 12px 52px;min-height:62px}
+.lt-ct{background:#fffbe6;border-color:#f1de8a}
+.lt-so{position:absolute;left:12px;top:12px;width:30px;height:30px;border-radius:50%;background:var(--gd);color:#fff;font-weight:800;display:flex;align-items:center;justify-content:center}
+.lt-ct .lt-so{background:var(--y);color:var(--gd)}
+.lt-o b{display:block;font-size:18px}.lt-o small{display:block;font-size:13px;color:var(--mut);line-height:1.4;margin-top:2px}
+.lt-o:not(:last-child):after{content:"\2193";position:absolute;left:50%;bottom:-21px;transform:translateX(-50%);font-size:20px;line-height:20px;color:var(--g);font-weight:800}
+@media(min-width:900px){.lt-day{grid-template-columns:repeat(4,1fr);gap:26px}
+.lt-o{padding:46px 12px 14px}.lt-so{left:12px;top:10px}.lt-o:not(:last-child):after{content:"\2192";left:auto;right:-22px;bottom:auto;top:50%;transform:translateY(-50%);width:18px;text-align:center}}
+.tuoi-the{display:grid;gap:12px;grid-template-columns:1fr 1fr}
+@media(min-width:900px){.tuoi-the{grid-template-columns:repeat(4,1fr)}}
+.tuoi-the .card .in{padding:14px}.tuoi-the b{font-size:22px;color:var(--gd);display:block}.tuoi-the small{display:block;color:var(--mut);font-size:14px;margin-top:2px}
+.tuoi-4{margin-top:14px}
+.ht-form{display:grid;gap:10px}
+.ht-form label{display:block;font-weight:700;font-size:14px}
+.ht-form input,.ht-form select{font:inherit;font-size:16px;padding:12px;border-radius:10px;border:1px solid #c9d8cd;background:#fff;color:inherit;width:100%;margin-top:4px;box-sizing:border-box}
+.ht-form button{border:0;cursor:pointer;font-size:17px}
+.ht-form button[disabled]{opacity:.6}
+.ht-ok{background:#e7f6ec;border:2px solid var(--g);border-radius:14px;padding:16px;color:var(--ink);text-align:left}
+.ht-ok h3{margin:0 0 6px;color:var(--gd)}.ht-ok ol{margin:8px 0 0;padding-left:20px}
+.ht-loi{background:#fff1ee;border:2px solid #e07a5f;border-radius:12px;padding:12px;font-size:15px;color:#7a2a1a}
+.ht-khoi{background:linear-gradient(135deg,var(--gd),#0f7a2b);color:#fff;padding:36px 0}
+.ht-khoi h2{color:#fff}.ht-khoi h2 em{color:var(--y)}
+.ht-khoi .ht-box{background:#fff;color:var(--ink);border-radius:18px;padding:20px 16px;max-width:560px;margin:14px auto 0;text-align:left}
+.ht-khoi .ht-wrap{text-align:center}
+.ht-khoi .ht-sub{opacity:.92;margin:0}
+.hlv-y{display:grid;gap:20px;align-items:start}
+@media(min-width:900px){.hlv-y{grid-template-columns:300px 1fr}}
+.hlv-y-the{background:linear-gradient(160deg,var(--gd),#0f7a2b);color:#fff;border-radius:18px;padding:26px 18px;text-align:center}
+.hlv-y-the{padding:0 0 22px;overflow:hidden}.hlv-y-the img{width:100%;height:auto;display:block;border-radius:18px 18px 0 0}.hlv-y-the b,.hlv-y-the span{padding:0 14px}
+.hlv-y-the b{display:block;font-size:22px;margin-top:10px}.hlv-y-the span{display:block;color:var(--y);font-weight:800;margin-top:4px}
+.hlv-y ul{margin:8px 0}.hlv-y blockquote{margin:14px 0 0;padding:10px 14px;border-left:4px solid var(--y);background:#fffbe6;border-radius:8px;font-style:italic}
+.hlv-y .nguon{font-size:13px;color:var(--mut)}
+.y-ngan{display:grid;gap:14px;align-items:center;background:#fff;border:1px solid #e3ebe5;border-radius:18px;padding:18px}
+.y-anh{width:120px;height:auto;border-radius:14px;justify-self:start}@media(min-width:900px){.y-ngan{grid-template-columns:120px 1fr auto}}
+.y-ngan h2{margin:0 0 6px}.y-ngan p{margin:0}
