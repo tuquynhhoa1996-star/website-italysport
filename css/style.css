@@ -353,7 +353,6 @@ nav.menu .dd>a.dd-a:after{content:" \25BE";font-size:11px;opacity:.8}
 nav.menu .dd-m{display:none;position:absolute;top:100%;left:0;min-width:200px;background:var(--gd);border-radius:10px;padding:6px;box-shadow:0 10px 26px rgba(0,0,0,.28);flex-direction:column;z-index:70}
 nav.menu .dd-m a{display:block}
 .top-cta{order:3;background:var(--y);color:var(--gd);font-weight:800;font-size:14px;line-height:1;padding:11px 16px;border-radius:999px;text-decoration:none;white-space:nowrap;box-shadow:0 2px 8px rgba(0,0,0,.25)}
-.top-cta .m{display:none}
 .burger{order:4}
 nav.menu{order:2}
 .brand{order:1}
@@ -364,16 +363,16 @@ nav.menu{order:2}
   nav.menu .dd-m{display:flex;position:static;box-shadow:none;background:transparent;padding:0 0 0 16px;min-width:0}
   nav.menu .dd>a.dd-a:after{content:""}
 }
-@media(max-width:560px){.top-cta .d{display:none}.top-cta .m{display:inline}.brand small{display:none}.brand span{font-size:17px}.top .wrap{padding:0 12px}}
+@media(max-width:560px){.brand small{display:none}.brand span{font-size:17px}.top .wrap{padding:0 12px;gap:6px}.top-cta{font-size:13px;padding:9px 11px}}
+@media(max-width:380px){.brand img{width:28px;height:auto}.brand span{font-size:13px;letter-spacing:0}.top-cta{font-size:11.5px;padding:8px 8px}.burger{padding:6px 8px}}
 
 /* ---- (14) thanh liên hệ đáy: biểu tượng Zalo thật, chữ không gãy dòng ---- */
 .dock a span.zi,.dock a span:has(.zi){display:flex;align-items:center;justify-content:center;height:26px}
 .dock a .zi{display:block}
 .dock a.go{flex-direction:row;white-space:nowrap;padding:0 6px}
 .dock a.go span{font-size:14px;display:inline}
-.dock a.go .s{display:none}
 @media(max-width:400px){.dock a.go{font-size:13px}.dock a.go span{font-size:13px}}
-@media(max-width:350px){.dock a.go .l{display:none}.dock a.go .s{display:inline}}
+@media(max-width:350px){.dock a.go,.dock a.go span{font-size:11.5px}.dock a.go{flex:1.5 1 0}}
 
 /* ---- (10) lưới không hở ô: mọi hàng cuối được dàn đủ chiều ngang ---- */
 .grid{display:grid;gap:16px;grid-template-columns:minmax(0,1fr)}
