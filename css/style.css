@@ -462,4 +462,18 @@ nav.menu{order:2}
   nav.menu .dd-m a[href="lien-he.html"]{display:none}
 }
 
+/* ---- (16) Thanh menu luôn hiện, không còn nút ba gạch (chị Hoa góp ý 31/10/2026: nhiều phụ huynh không bấm ba gạch) ----
+   Dưới 1280px: hàng 1 là logo + nút Đăng ký học thử, hàng 2 là dải menu vuốt ngang, mục con của Giới thiệu và Liên hệ được bày thẳng ra. */
+@media(max-width:1279px){
+  .burger{display:none!important}
+  .top .wrap{flex-wrap:wrap;height:auto;min-height:62px;padding-top:8px;padding-bottom:0;row-gap:4px}
+  .brand{order:1}.top-cta{order:2;margin-left:auto}
+  nav.menu{display:flex!important;order:3;flex:0 0 100%;width:100%;position:static!important;flex-direction:row!important;flex-wrap:nowrap;align-items:center!important;gap:6px;margin:0!important;padding:4px 28px 10px 0!important;max-height:none!important;overflow-x:auto;overflow-y:hidden;background:none!important;box-shadow:none!important;scrollbar-width:none;-webkit-overflow-scrolling:touch;-webkit-mask-image:linear-gradient(90deg,#000 calc(100% - 36px),transparent);mask-image:linear-gradient(90deg,#000 calc(100% - 36px),transparent)}
+  nav.menu::-webkit-scrollbar{display:none}
+  nav.menu .dd,nav.menu .dd-m{display:contents!important}
+  nav.menu .dd>a.dd-a{display:none!important}
+  nav.menu>a,nav.menu .dd-m a,nav.menu .dd-m a[href="lien-he.html"]{display:inline-block!important;flex:0 0 auto;white-space:nowrap;font-size:14px!important;line-height:1.2;padding:7px 13px!important;border:1px solid rgba(255,255,255,.28)!important;border-radius:999px!important;color:#fff!important;background:rgba(255,255,255,.06);text-decoration:none}
+  nav.menu a.on{background:var(--y)!important;color:var(--gd)!important;border-color:var(--y)!important;font-weight:800}
+}
+
 /* <<< sua-15-loi */

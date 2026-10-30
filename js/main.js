@@ -102,3 +102,10 @@ document.querySelectorAll("[data-tm]").forEach(function (b) {
     });
   });
 })();
+
+// thanh menu vuốt ngang (31/10/2026): cuộn sẵn tới mục đang xem để phụ huynh thấy mình đang ở trang nào
+(function(){
+  var m=document.querySelector('nav.menu');if(!m)return;
+  var a=m.querySelectorAll('a.on'),on=null;a.forEach(function(x){if(x.offsetWidth)on=x;});
+  if(on&&m.scrollWidth>m.clientWidth){m.scrollLeft=on.getBoundingClientRect().left-m.getBoundingClientRect().left+m.scrollLeft-12;}
+})();
