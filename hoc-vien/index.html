@@ -307,6 +307,33 @@ footer .chu-to{font-weight:900;font-size:clamp(46px,13vw,150px);line-height:.85;
  #login .dn{max-width:460px}
 }
 @media(max-width:759px){.an-dt{display:none}}
+/* ---------- bai test 2 phut (cong khai, khong can dang nhap) - them 31/10/2026 ---------- */
+.mo-bt{display:block;margin-top:14px;padding:14px 16px;border-radius:16px;border:1.5px dashed var(--vien2);color:#fff;text-decoration:none;text-align:left;font-size:14.5px}
+.mo-bt b{color:var(--chanh)}
+#bt{display:none;position:fixed;inset:0;z-index:60;overflow-y:auto;padding:22px 16px 40px;background:var(--san)}
+body.bt #bt{display:block}body.bt{overflow:hidden}
+.bt-o{max-width:520px;margin:auto}
+.bt-dau{display:flex;align-items:center;gap:10px;margin-bottom:14px}
+.bt-dau img{width:44px;height:auto}.bt-dau b{font-size:16px;flex:1}
+.bt-dau button{background:none;border:1px solid var(--vien2);color:inherit;border-radius:10px;padding:8px 12px;font-weight:700;cursor:pointer;font-size:13.5px}
+.bt-tien{height:8px;border-radius:5px;background:var(--vien);overflow:hidden;margin-bottom:16px}
+.bt-tien i{display:block;height:100%;background:var(--chanh);transition:width .25s}
+.bt-o h1{font-size:25px;font-weight:900;line-height:1.2;margin:4px 0 8px}
+.bt-o .nhom{font-size:12.5px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--chanh)}
+.lc{display:grid;gap:10px;margin-top:16px}
+.lc button{min-height:54px;text-align:left;padding:12px 16px;border-radius:14px;border:1.5px solid var(--vien2);background:var(--san2);color:inherit;font-size:16px;font-weight:600;cursor:pointer}
+.lc button:hover,.lc button.on{border-color:var(--chanh)}
+.lc select{min-height:54px;border-radius:14px;border:1.5px solid var(--vien2);background:var(--san2);color:inherit;font-size:17px;padding:0 14px}
+.kq-bt{text-align:center}
+.kq-bt .muc-to{display:inline-block;font-size:26px;font-weight:900;color:var(--toi);background:var(--chanh);border-radius:14px;padding:8px 18px;margin:10px 0 6px}
+.kq-bt .the,#bto .the{text-align:left;margin-top:12px}
+.bt-nha{display:grid;gap:10px;margin-top:12px}
+.bt-nha .bai{border:1px solid var(--vien);border-radius:14px;padding:12px 14px}
+.bai b{display:block;font-size:15.5px}.bai .tg{font-size:12.5px;color:var(--chanh);font-weight:700;margin:2px 0 4px}
+.bai p{margin:0;font-size:14px;color:var(--mo)}
+.nut-phu{min-height:48px;padding:8px 14px;border-radius:12px;border:1px solid var(--vien2);background:none;color:inherit;font-weight:700;font-size:15px;cursor:pointer}
+.nut-cot{display:grid;gap:10px;margin-top:16px}
+.nut-cot .btn{width:100%}
 </style>
 <style>/* che do nhung trong website chinh */
 html.nhung body{min-height:0}
@@ -361,8 +388,10 @@ html.nhung .tran.le{background:#fffaf0;border-color:#ecd28a}
   <div class="loi-dn" id="loidn"></div>
   <div class="ghi" id="ghidn">Nhập đúng số điện thoại đã đăng ký học ở ITALY SPORT để xem hồ sơ và điểm năng lực của con. Mỗi số chỉ mở được hồ sơ của con mình.</div>
  </form>
+ <a class="mo-bt" href="#/baitest">🏀 <b>Con chưa học ITALY SPORT?</b> Làm bài test năng lực 2 phút, miễn phí, không cần đăng ký.</a>
  <div class="slogan">LET'S DO IT</div>
 </div></section>
+<section id="bt"><div class="bt-o" id="bto"></div></section>
 <header><div class="wrap">
  <div class="top">
   <a class="logo" href="#/"><img src="logo.png" alt="ITALY SPORT"><span><b><span class="kim">ITALY</span> SPORT</b><small>Điểm năng lực bóng rổ</small></span></a>
@@ -771,6 +800,81 @@ function dangXuat(){try{localStorage.removeItem(KHOA)}catch(_){}D=null;$("#app")
  if(tra){cheDo("ph");$("#mk").value=tra;dangNhap();return}
  if(mk){try{moWeb(mk.startsWith("ph:")?await moSdt(mk.slice(3)):await giaiMa(mk));return}catch(_){try{localStorage.removeItem(KHOA)}catch(__){}}}
  $("#mk").focus()})();
+
+/* ---------- bai test 2 phut: cong khai, phu huynh tu danh gia, chi ra muc chung, khong ra diem (31/10/2026, chi Hoa duyet) ---------- */
+const TRU_BT={KN:"Kỹ năng",TL:"Thể lực",GT:"Thái độ và giá trị"},W_BT={KN:.6,TL:.2,GT:.2};
+const MUC4=["Chưa làm được","Đôi khi làm được","Thường làm được","Làm tốt, chắc chắn"];
+const CAU_BT=[
+ {k:"nam",nhom:"Về con",hoi:"Con sinh năm nào?"},
+ {k:"lau",nhom:"Về con",hoi:"Con đã tập bóng rổ bao lâu?",lc:["Chưa tập bao giờ","Dưới 6 tháng","6 tháng đến 1 năm","1 đến 2 năm","Trên 2 năm"]},
+ {k:"buoi",nhom:"Về con",hoi:"Mỗi tuần con chơi hoặc tập bóng rổ mấy buổi?",lc:["Gần như không","1 buổi","2 buổi","3 buổi trở lên"]},
+ {k:"KN",tc:"Dẫn bóng",hoi:"Con vừa đi vừa đập bóng, bóng không bị tuột khỏi tay."},
+ {k:"KN",tc:"Chuyền và bắt bóng",hoi:"Con chuyền và bắt bóng với bạn đứng cách 3-5m mà không bị rơi bóng."},
+ {k:"KN",tc:"Ném rổ",hoi:"Con ném bóng chạm vành hoặc vào rổ khi đứng gần rổ."},
+ {k:"KN",tc:"Đọc trận",hoi:"Con biết chạy vào chỗ trống để nhận bóng, không đứng một chỗ chờ."},
+ {k:"TL",tc:"Tốc độ",hoi:"Con chạy nhanh, đổi hướng nhanh bằng hoặc hơn đa số bạn cùng tuổi."},
+ {k:"TL",tc:"Sức bền",hoi:"Con chơi bóng 20-30 phút liên tục mà không đòi nghỉ."},
+ {k:"GT",tc:"Đồng đội",hoi:"Con chuyền cho bạn chứ không giữ bóng một mình."},
+ {k:"GT",tc:"Không nản",hoi:"Thua hoặc ném trượt, con vẫn tiếp tục cố gắng, không cáu hay bỏ cuộc."},
+ {k:"GT",tc:"Tiếp thu",hoi:"Con nghe và làm theo hướng dẫn của thầy cô khi tập."},
+ {k:"GT",tc:"Kỷ luật",hoi:"Con đi tập đều, đúng giờ, tự chuẩn bị giày, nước, đồ tập."}];
+const BAI_TAP={
+ "Dẫn bóng":{ten:"Đập bóng tại chỗ đổi tay",tg:"5-10 phút, 3 buổi/tuần",cach:"Đứng tại chỗ đập bóng 1 phút tay phải, 1 phút tay trái, rồi đổi tay qua trước mặt. Cố gắng mắt nhìn thẳng, không nhìn bóng. Đếm số lần bóng tuột để tuần sau giảm."},
+ "Chuyền và bắt bóng":{ten:"Chuyền bóng vào tường bắt lại",tg:"10 phút, 3 buổi/tuần",cach:"Đứng cách tường 2-3m, chuyền bằng 2 tay trước ngực vào tường rồi bắt lại bằng 2 tay. 3 hiệp x 20 lần, đếm số lần bắt trượt."},
+ "Ném rổ":{ten:"Ném bóng vào xô hoặc rổ gần",tg:"10 phút, 3 buổi/tuần",cach:"Đặt xô, thùng hoặc rổ thấp cách 1,5-2m. Ném bằng 1 tay, khuỷu tay hướng lên, kết thúc cổ tay gập xuống. Mỗi buổi 30 quả, ghi số quả vào."},
+ "Đọc trận":{ten:"Xem trận cùng con",tg:"15 phút, 1 buổi/tuần",cach:"Xem một đoạn trận bóng rổ, dừng hình 3 lần và hỏi con: bạn không có bóng nên chạy đi đâu, nếu con cầm bóng con chuyền cho ai."},
+ "Tốc độ":{ten:"Chạy con thoi 5m",tg:"8 phút, 3 buổi/tuần",cach:"Đặt 2 vật cách nhau 5m. Bố mẹ vỗ tay là chạy chạm vật bên kia rồi quay về. 6 lượt, nghỉ 30-40 giây giữa các lượt."},
+ "Sức bền":{ten:"Chạy - đi xen kẽ",tg:"10 phút, 2 buổi/tuần",cach:"Chạy nhẹ 1 phút, đi bộ 1 phút, lặp 5 lần. Bé nhỏ thay bằng trò đuổi bắt 10 phút. Tuần sau tăng thêm 1 lượt."},
+ "Đồng đội":{ten:"Chuyền 2 người",tg:"10 phút, 2 buổi/tuần",cach:"Chuyền bóng với anh chị em hoặc bố mẹ, đếm số đường chuyền liên tục không rơi. Mỗi đường chuyền đẹp của người kia, con nói một lời khen."},
+ "Không nản":{ten:"Một động tác khó mỗi tuần",tg:"5 phút, 4 buổi/tuần",cach:"Chọn 1 động tác con chưa làm được, tập 5 phút mỗi ngày. Bố mẹ khen sự cố gắng (con đã thử lại rất nhiều lần) thay vì chỉ khen kết quả."},
+ "Tiếp thu":{ten:"Kể lại bài học",tg:"3 phút sau mỗi buổi tập",cach:"Sau buổi tập, con kể lại 1 điều thầy cô dặn và làm lại cho bố mẹ xem. Buổi sau con tự nhắc mình điều đó."},
+ "Kỷ luật":{ten:"Tự chuẩn bị đồ tập",tg:"Trước mỗi buổi tập",cach:"Con tự soạn túi: giày, nước, đồ tập, có mặt trước giờ 10 phút. Tick lịch mỗi buổi đi tập đúng giờ."}};
+const thePhieu=b=>`<b>${esc(b.ten)}</b><div class="tg">${esc(b.tg)}</div><p>${esc(b.cach)}</p>`;
+let BT={i:0,tl:[],lua:null};
+function moBT(){document.body.classList.add("bt");if(!BT.lua)fetch("./ph/chung.json").then(r=>r.json()).then(j=>BT.lua=j.chung.lua).catch(()=>{});veBT()}
+function dongBT(){document.body.classList.remove("bt");if(location.hash=="#/baitest")history.replaceState(null,"",location.pathname+location.search+"#/");ve()}
+function kiemBT(){location.hash=="#/baitest"?moBT():document.body.classList.remove("bt")}
+function chonBT(v){BT.tl[BT.i]=v;BT.i++;veBT();$("#bt").scrollTop=0}
+function luiBT(){if(BT.i>0){BT.i--;veBT()}else dongBT()}
+function lamLaiBT(){BT={i:0,tl:[],lua:BT.lua};veBT()}
+function veBT(){
+ const n=CAU_BT.length,i=BT.i;
+ let o=`<div class="bt-dau"><img src="logo.png" alt=""><b>Bài test năng lực ITALY SPORT</b><button type="button" onclick="dongBT()">Đóng</button></div>`;
+ if(i>=n){$("#bto").innerHTML=o+ketQuaBT();return}
+ const q=CAU_BT[i],nam=new Date().getFullYear();
+ o+=`<div class="bt-tien"><i style="width:${i/n*100}%"></i></div><span class="nhom">Câu ${i+1}/${n} &middot; ${esc(q.nhom||TRU_BT[q.k])}</span><h1>${esc(q.hoi)}</h1>`;
+ if(q.k=="nam")o+=`<div class="lc"><select id="selnam" aria-label="Năm sinh"><option value="">Chọn năm sinh</option>${Array.from({length:16},(_,j)=>nam-4-j).map(y=>`<option${BT.tl[0]===y?" selected":""}>${y}</option>`).join("")}</select><button type="button" class="btn" onclick="const v=+$('#selnam').value;if(v)chonBT(v)">Tiếp tục</button></div>`;
+ else o+=`<div class="lc">${(q.lc||MUC4).map((t,j)=>`<button type="button"${BT.tl[i]===j?' class="on"':""} onclick="chonBT(${j})">${esc(t)}</button>`).join("")}</div>`;
+ o+=`<div style="margin-top:16px"><button type="button" class="nut-phu" onclick="luiBT()">&larr; ${i?"Câu trước":"Quay lại"}</button></div>`;
+ $("#bto").innerHTML=o;
+}
+function ketQuaBT(){
+ const a=BT.tl,nam=a[0],lau=a[1],buoi=a[2],tong={},dem={},tcV=[];
+ CAU_BT.forEach((q,j)=>{if(!q.tc)return;tong[q.k]=(tong[q.k]||0)+a[j];dem[q.k]=(dem[q.k]||0)+1;tcV.push([q.tc,a[j],q.k])});
+ const tru={};Object.keys(tong).forEach(k=>tru[k]=tong[k]/dem[k]/3*100);
+ let d=Object.keys(tru).reduce((s,k)=>s+tru[k]*W_BT[k],0)*.85;   // tu cham hay cao hon thuc te nen nen lai
+ if(lau<=1)d=Math.min(d,55);
+ const muc=d<35?["Mới làm quen","Con đang ở bước đầu. Đây là lúc tốt nhất để xây nền tảng cầm bóng, đập bóng và vận động."]:d<62?["Đang phát triển","Con đã có những kỹ năng cơ bản, cần tập đều để vững hơn và chơi tự tin trong trận."]:["Có nền tảng tốt","Con đã chơi khá chắc. Con nên được HLV đánh giá để xếp đúng cấp, đúng lớp."];
+ const xs=Object.keys(tru).sort((x,y)=>tru[y]-tru[x]||W_BT[y]-W_BT[x]),manh=xs[0],yeu=xs[xs.length-1];
+ const l=(BT.lua||[]).find(z=>z.nam_tu?nam>=z.nam_tu&&nam<=z.nam_den:nam<=z.nam_den);
+ const bai=tcV.sort((x,y)=>x[1]-y[1]).slice(0,2).map(z=>BAI_TAP[z[0]]).filter(Boolean);
+ const chu=`Kết quả bài test ITALY SPORT: con sinh ${nam}${l?" (lứa "+l.ten+")":""}, mức sơ bộ "${muc[0]}", mạnh nhất ${TRU_BT[manh]}, nên tập trước ${TRU_BT[yeu]}. Nhờ ITALY SPORT tư vấn lịch học thử.`;
+ BT.chu=chu;
+ return `<div class="bt-tien"><i style="width:100%"></i></div><div class="kq-bt"><span class="nhom">Kết quả sơ bộ</span>
+ <h1 style="margin-bottom:0">Con sinh ${nam}${l?`, thuộc lứa <span style="color:var(--chanh)">${esc(l.ten)}</span>`:""}</h1>
+ <div class="muc-to">${muc[0]}</div><p class="mo" style="margin:4px 0 0">${muc[1]}</p></div>
+ <div class="luoi hai" style="margin-top:4px"><div class="the"><span class="tde">Mạnh nhất</span><b style="font-size:18px;color:var(--len)">${TRU_BT[manh]}</b></div><div class="the"><span class="tde">Nên tập trước</span><b style="font-size:18px;color:var(--do)">${TRU_BT[yeu]}</b></div></div>
+ ${bai.length?`<div class="the"><span class="tde">2 bài con tập được ngay ở nhà</span><div class="bt-nha">${bai.map(b=>`<div class="bai">${thePhieu(b)}</div>`).join("")}</div></div>`:""}
+ ${buoi<=1?`<div class="canh">Con mới chơi ${buoi?"1 buổi":"rất ít"} mỗi tuần. Tập đều 2-3 buổi một tuần là cách nhanh nhất để con tiến bộ.</div>`:""}
+ <div class="the"><span class="tde">Muốn biết chính xác?</span><p class="mo" style="margin:0">Đây là kết quả do phụ huynh tự đánh giá, chỉ để tham khảo. Ở buổi học thử, HLV ITALY SPORT sẽ quan sát con chơi và xếp cấp chính xác theo 14 tiêu chí và các bài test.</p></div>
+ <div class="nut-cot"><a class="btn" href="https://hocthu.ygroupsport.com/?utm_source=website&utm_content=bai-test" target="_blank" rel="noopener">🏀 Đăng ký học thử để HLV đánh giá chính xác</a>
+ <button type="button" class="nut-phu" onclick="chepBT(this)">Chép kết quả để nhắn Zalo ITALY SPORT</button>
+ <a class="nut-phu" style="display:flex;align-items:center;justify-content:center;text-decoration:none" href="https://zalo.me/0904960662" target="_blank" rel="noopener">💬 Mở Zalo ITALY SPORT</a>
+ <button type="button" class="nut-phu" onclick="lamLaiBT()">Làm lại bài test</button></div>`;
+}
+function chepBT(b){const ok=()=>{b.textContent="Đã chép, mở Zalo và dán vào nhé"};
+ (navigator.clipboard?navigator.clipboard.writeText(BT.chu):Promise.reject()).then(ok).catch(()=>{const t=document.createElement("textarea");t.value=BT.chu;document.body.appendChild(t);t.select();try{document.execCommand("copy");ok()}catch(_){}t.remove()})}
+addEventListener("hashchange",kiemBT);kiemBT();
 </script>
 <script>/* ghep website: mo san tab noi bo khi ?che=nb */
 (function(){var q=new URLSearchParams(location.search);if(q.get("che")=="nb"&&document.body.classList.contains("khoa"))cheDo("nb")})();
