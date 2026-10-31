@@ -476,4 +476,7 @@ nav.menu{order:2}
   nav.menu a.on{background:var(--y)!important;color:var(--gd)!important;border-color:var(--y)!important;font-weight:800}
 }
 
+/* 4 bac moi cap (31/10/2026) */
+.cap-bacs{display:flex;justify-content:center;gap:4px;margin-top:6px}.cap-bacs i{font-style:normal;font-size:11px;font-weight:800;color:var(--gd);background:#eaf5ec;border:1px solid #dbe6de;border-radius:6px;min-width:20px;padding:1px 0;text-align:center}
+
 /* <<< sua-15-loi */
