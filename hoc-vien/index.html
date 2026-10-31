@@ -856,14 +856,15 @@ function ketQuaBT(){
  if(lau<=1)d=Math.min(d,55);
  const muc=d<35?["Mới làm quen","Con đang ở bước đầu. Đây là lúc tốt nhất để xây nền tảng cầm bóng, đập bóng và vận động."]:d<62?["Đang phát triển","Con đã có những kỹ năng cơ bản, cần tập đều để vững hơn và chơi tự tin trong trận."]:["Có nền tảng tốt","Con đã chơi khá chắc. Con nên được HLV đánh giá để xếp đúng cấp, đúng lớp."];
  const xs=Object.keys(tru).sort((x,y)=>tru[y]-tru[x]||W_BT[y]-W_BT[x]),manh=xs[0],yeu=xs[xs.length-1];
+ const deu=tru[manh]-tru[yeu]<10;   // cac nhom gan bang nhau thi khong goi ten manh/yeu
  const l=(BT.lua||[]).find(z=>z.nam_tu?nam>=z.nam_tu&&nam<=z.nam_den:nam<=z.nam_den);
  const bai=tcV.sort((x,y)=>x[1]-y[1]).slice(0,2).map(z=>BAI_TAP[z[0]]).filter(Boolean);
- const chu=`Kết quả bài test ITALY SPORT: con sinh ${nam}${l?" (lứa "+l.ten+")":""}, mức sơ bộ "${muc[0]}", mạnh nhất ${TRU_BT[manh]}, nên tập trước ${TRU_BT[yeu]}. Nhờ ITALY SPORT tư vấn lịch học thử.`;
+ const chu=`Kết quả bài test ITALY SPORT: con sinh ${nam}${l?" (lứa "+l.ten+")":""}, mức sơ bộ "${muc[0]}", ${deu?"các nhóm khá đều nhau":"mạnh nhất "+TRU_BT[manh]+", nên tập trước "+TRU_BT[yeu]}. Nhờ ITALY SPORT tư vấn lịch học thử.`;
  BT.chu=chu;
  return `<div class="bt-tien"><i style="width:100%"></i></div><div class="kq-bt"><span class="nhom">Kết quả sơ bộ</span>
  <h1 style="margin-bottom:0">Con sinh ${nam}${l?`, thuộc lứa <span style="color:var(--chanh)">${esc(l.ten)}</span>`:""}</h1>
  <div class="muc-to">${muc[0]}</div><p class="mo" style="margin:4px 0 0">${muc[1]}</p></div>
- <div class="luoi hai" style="margin-top:4px"><div class="the"><span class="tde">Mạnh nhất</span><b style="font-size:18px;color:var(--len)">${TRU_BT[manh]}</b></div><div class="the"><span class="tde">Nên tập trước</span><b style="font-size:18px;color:var(--do)">${TRU_BT[yeu]}</b></div></div>
+ ${deu?`<div class="the" style="margin-top:4px"><span class="tde">Các nhóm khá đều nhau</span><p class="mo" style="margin:0">Không có nhóm nào lệch hẳn. Con nên tập đều cả ${Object.keys(tru).length} nhóm: ${Object.keys(tru).map(k=>TRU_BT[k]).join(", ")}.</p></div>`:`<div class="luoi hai" style="margin-top:4px"><div class="the"><span class="tde">Mạnh nhất</span><b style="font-size:18px;color:var(--len)">${TRU_BT[manh]}</b></div><div class="the"><span class="tde">Nên tập trước</span><b style="font-size:18px;color:var(--do)">${TRU_BT[yeu]}</b></div></div>`}
  ${bai.length?`<div class="the"><span class="tde">2 bài con tập được ngay ở nhà</span><div class="bt-nha">${bai.map(b=>`<div class="bai">${thePhieu(b)}</div>`).join("")}</div></div>`:""}
  ${buoi<=1?`<div class="canh">Con mới chơi ${buoi?"1 buổi":"rất ít"} mỗi tuần. Tập đều 2-3 buổi một tuần là cách nhanh nhất để con tiến bộ.</div>`:""}
  <div class="the"><span class="tde">Muốn biết chính xác?</span><p class="mo" style="margin:0">Đây là kết quả do phụ huynh tự đánh giá, chỉ để tham khảo. Ở buổi học thử, HLV ITALY SPORT sẽ quan sát con chơi và xếp cấp chính xác theo 14 tiêu chí và các bài test.</p></div>
