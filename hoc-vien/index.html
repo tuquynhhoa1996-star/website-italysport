@@ -334,6 +334,8 @@ body.bt #bt{display:block}body.bt{overflow:hidden}
 .nut-phu{min-height:48px;padding:8px 14px;border-radius:12px;border:1px solid var(--vien2);background:none;color:inherit;font-weight:700;font-size:15px;cursor:pointer}
 .nut-cot{display:grid;gap:10px;margin-top:16px}
 .nut-cot .btn{width:100%}
+.bar.pk{background:rgba(255,255,255,.1);border-radius:6px;height:10px;overflow:hidden}.bar.pk div{height:100%;background:linear-gradient(90deg,#3fd47a,var(--chanh));border-radius:6px}
+.ds-kn{margin:6px 0 0;padding-left:18px;line-height:1.55}.ds-kn li{margin:2px 0}
 </style>
 <style>/* che do nhung trong website chinh */
 html.nhung body{min-height:0}
@@ -649,18 +651,34 @@ const ICON_CAP=[
  `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6 11l6-6 6 6M6 18l6-6 6 6"/></svg>`,
  `<svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.8l2.8 5.7 6.2.9-4.5 4.4 1.1 6.2L12 17.1 6.4 20l1.1-6.2L3 9.4l6.2-.9z"/></svg>`,
  `<svg viewBox="0 0 24 24" fill="currentColor"><path d="M3 7l4.5 4L12 4l4.5 7L21 7l-2 11H5z"/><rect x="5" y="19.2" width="14" height="2" rx="1"/></svg>`];
+/* Ten cap kem bac trong cap, vd "Rookie 3". Chi them so bac khi co ca cap_do va bac 1-4. */
+function tenCapDo(h){const c=(D.cap_do||[]).find(x=>x.ma==h.cap_do);if(!c)return "";return c.ten+(h.bac?" "+h.bac:"");}
 function khoiChoSan(h){
  const cd=D.cap_do,vt=cd.findIndex(c=>c.ma==h.cap_do),co=vt>=0,rd=h.radar&&typeof h.radar=="object"?h.radar:null;
  return `<div class="luoi hai" style="margin-top:12px">
  <div class="the"><span class="tde">Cấp độ${co?"":`<span class="cho">Chờ dữ liệu</span>`}</span>
  <div class="cap-do" style="--p:${co?vt/(cd.length-1):0}">${cd.map((c,i)=>`<div class="bac${i<vt?" qua":""}${i==vt?" on":""}${c.ma=="MVP"?" mvp":""}"><i>${ICON_CAP[i]||ICON_CAP[0]}</i><b>${esc(c.ma)}</b><small>${esc(c.mo_ta||"")}</small></div>`).join("")}</div>
- <p class="mo nho" style="margin:0">${co?`Bậc hiện tại: <b style="color:var(--chanh)">${esc(h.cap_do)}</b>${cd[vt+1]?` &middot; Bậc tiếp theo: <b style="color:#fff">${esc(cd[vt+1].ma)}</b>`:" &middot; Bậc cao nhất của ITALY SPORT"}. HLV xếp bậc sau mỗi giải, khoá học hoặc đợt kiểm tra.`:"HLV chưa xếp cấp độ cho bé. Khi có dữ liệu, bậc của bé sẽ sáng lên trên thang 4 bậc."}</p></div>
+ <p class="mo nho" style="margin:0">${co?`Cấp hiện tại: <b style="color:var(--chanh)">${esc(tenCapDo(h))}</b>${cd[vt+1]?` &middot; Cấp tiếp theo: <b style="color:#fff">${esc(cd[vt+1].ten)}</b>`:" &middot; Cấp cao nhất của ITALY SPORT"}. Mỗi cấp có 4 bậc, HLV xếp sau mỗi giải, khoá học hoặc đợt kiểm tra.`:(h.xep_trang?esc(h.xep_trang)+". Khi HLV xếp cấp, cấp và bậc của bé sẽ sáng lên trên thang 4 cấp.":"HLV chưa xếp cấp cho bé. Khi có dữ liệu, cấp của bé sẽ sáng lên trên thang 4 cấp.")}</p></div>
  <div class="the"><span class="tde">Năng lực 9 nhóm${rd?"":`<span class="cho">Chờ dữ liệu</span>`}</span>${radar(rd)}
  <p class="mo nho" style="margin:0">${rd?"Thang 0-100 (mức 1-5 x 20), HLV chấm theo chuẩn cấp của bé.":"Biểu đồ 7 kỹ năng, thể lực và thái độ sẽ hiện sau lần HLV đánh giá kỳ đầu."}</p></div></div>`;
 }
 function khoiGiaiTG(h){
  if(!h.giai_tg||!h.giai_tg.length)return "";
  return `<h2>Giải đã được ghi danh</h2><div class="the"><div class="tt-giai">${h.giai_tg.map(g=>`<div><span>${esc(g.nam)}</span><div><b>${esc(g.vai)}</b><div class="mo nho">${esc(g.giai)} &middot; <a href="../${esc(g.trang)}" target="_top">xem giải</a></div></div></div>`).join("")}</div><p class="mo nho" style="margin:8px 0 0">Chỉ hiện giải đã công bố công khai và khớp chắc chắn với họ tên của bé. <a href="../vinh-danh.html" target="_top">Trang Vinh danh</a></p></div>`
+}
+function tenKN(t){t=String(t||"");const i=t.indexOf("/ ");return (i>0?t.slice(i+2):t).replace(/\s+/g," ").trim()}
+function khoiPhieu(h){
+ const p=h.phieu;if(!p||!p.kn||!p.kn.length)return "";
+ const dat=p.kn.filter(k=>k[0]),chua=p.kn.filter(k=>!k[0]),tong=p.kn.length,pt=Math.round(dat.length*100/tong);
+ const ky=(p.thang?"Tháng "+p.thang+"/":"Năm ")+(p.nam||"");
+ const li=a=>a.map(k=>`<li>${esc(tenKN(k[1]))}</li>`).join("");
+ const nx=(t,v)=>v?`<div class="the nx"><span class="tde">${t}</span><p style="margin:0">${esc(String(v).replace(/^[:\s]+/,""))}</p></div>`:"";
+ return `<h2>Phiếu đánh giá khoá gần nhất<small>${esc(ky)}${p.hlv?" &middot; HLV "+esc(p.hlv):""}</small></h2>
+ <div class="the"><div style="display:flex;gap:16px;align-items:center;flex-wrap:wrap"><div><span class="k">Kỹ năng đã thành thạo</span> <b style="font-size:28px;color:var(--chanh);display:block">${dat.length}/${tong}</b></div>
+ <div style="flex:1;min-width:160px"><div class="bar pk"><div style="width:${pt}%"></div></div><div class="mo nho" style="margin-top:6px">${p.cap_truoc?esc(p.cap_truoc)+" &rarr; ":""}<b>${esc(p.cap_sau||"")}</b></div></div></div></div>
+ <div class="luoi hai" style="margin-top:12px"><div class="the"><span class="tde" style="color:var(--len)">Đã thành thạo (${dat.length})</span><ul class="ds-kn">${li(dat)||"<li class=mo>Chưa có</li>"}</ul></div>
+ <div class="the"><span class="tde" style="color:var(--do)">Đang luyện tiếp (${chua.length})</span><ul class="ds-kn">${li(chua)||"<li class=mo>Đã thành thạo hết kỹ năng của cấp</li>"}</ul></div></div>
+ <div class="luoi hai" style="margin-top:12px">${nx("Nhận xét ý thức",p.nx_y)}${nx("Nhận xét chuyên môn",p.nx_cm)}${p.mt_y&&p.mt_y!==p.nx_y?nx("Mục tiêu khoá tới: ý thức",p.mt_y):""}${p.mt_cm&&p.mt_cm!==p.nx_cm?nx("Mục tiêu khoá tới: chuyên môn",p.mt_cm):""}</div>`;
 }
 function trangHV(ma){
  const h=D.hoc_vien.find(x=>x.ma==ma);if(!h)return `<p class="trong">Không thấy học viên.</p>`;
@@ -670,14 +688,14 @@ function trangHV(ma){
  <section class="hero"><div class="ho-so-dau"><div class="vt">${esc(chuDau(h.ten))}</div><div>
  <span class="tag sap">${h.lua?esc(tenLua(h.lua)):"Chưa xếp lứa"}</span>${nhanVuot(h)}${h.vi_tri?`<span class="tag">${esc(h.vi_tri)}</span>`:""}${h.nghi?`<span class="tag nghi">Đã nghỉ</span>`:""}${nhanMau(h)}
  <h1>${esc(h.ten)}</h1><div class="mo nho">Mã ${esc(h.ma)}${h.nam?" &middot; Sinh "+h.nam:" &middot; Chưa có năm sinh"}${h.co_so?" &middot; "+esc(h.co_so):""}${h.sdt?"<br>SĐT phụ huynh "+esc(h.sdt):""}</div></div></div>`;
- if(!c)return o+`</section>${khoiChoSan(h)}${khoiGiaiTG(h)}<div class="the" style="margin-top:12px;text-align:center;padding:30px"><span class="tde" style="color:var(--chanh)">Đang chờ HLV đánh giá kỳ đầu</span><p class="mo" style="margin:0">Bé chưa có lần đánh giá nào trong sổ điểm. Hồ sơ, điểm năng lực và biểu đồ tiến bộ sẽ hiện ngay sau lần HLV đánh giá đầu tiên (sau giải đấu, khoá học hoặc đợt kiểm tra).</p></div>`;
+ if(!c)return o+`</section>${khoiChoSan(h)}${khoiPhieu(h)}${khoiGiaiTG(h)}<div class="the" style="margin-top:12px;text-align:center;padding:30px"><span class="tde" style="color:var(--chanh)">${h.phieu?"Điểm năng lực 0-100 sắp có":"Đang chờ HLV đánh giá kỳ đầu"}</span><p class="mo" style="margin:0">${h.phieu?"Phiếu đánh giá ở trên là kết quả khoá gần nhất.":"Bé chưa có lần đánh giá nào trong sổ điểm."} Hồ sơ, điểm năng lực và biểu đồ tiến bộ sẽ hiện ngay sau lần HLV đánh giá đầu tiên (sau giải đấu, khoá học hoặc đợt kiểm tra).</p></div>`;
  o+=`<div class="bang-diem">${vong(c.diem)}<div class="chi-so"><div><span class="k">Mức năng lực</span><span class="tag muc" style="font-size:14px">${esc(c.muc)}</span></div>
  <div><span class="k">Hạng trong lứa ${h.lua?esc(tenLua(h.lua)):""}</span><b>${h.hang||"-"}</b></div>
- ${h.cap_do?`<div><span class="k">Cấp độ</span><b style="font-size:18px;color:var(--chanh)">${esc(h.cap_do)}</b></div>`:""}</div>
+ ${h.cap_do?`<div><span class="k">Cấp độ</span><b style="font-size:18px;color:var(--chanh)">${esc(tenCapDo(h))}</b></div>`:""}</div>
  <div style="grid-column:1/-1;min-width:0" class="tru-o">${barTru(c.goc,tr&&tr.goc)}</div></div>
  <p class="mo nho" style="margin:8px 0 0">Chấm ngày ${fd(c.ngay)} &middot; ${esc(c.loai)}: ${esc(c.dot)}${c.hlv?" &middot; HLV "+esc(c.hlv):""}</p></section>`;
  if(h.vuot)o+=`<div class="canh"><b>Chơi vượt lên ${esc(tenLua(h.vuot))}.</b> Điểm năng lực ${c.diem} chấm theo chuẩn ${esc(tenLua(h.lua))}. Điểm quy đổi khi xếp đội ${esc(tenLua(h.vuot))}: <b>${quyDoi(h)}</b> (= ${c.diem} x ${soVN(h.he_so)}, bé nhỏ hơn ${h.tuoi_nho} tuổi so với năm sinh nhỏ nhất của ${esc(tenLua(h.vuot))}).${h.vuot_gc?`<br>HLV ghi chú: ${esc(h.vuot_gc)}`:""}</div>`;
- o+=khoiChoSan(h);o+=khoiGiaiTG(h);
+ o+=khoiChoSan(h);o+=khoiPhieu(h);o+=khoiGiaiTG(h);
  const xs=D.tru.map(t=>[t.ma,c.goc[t.ma]]).sort((a,b)=>b[1]-a[1]);
  o+=`<h2>Nhận xét của HLV</h2><div class="luoi hai">
  <div class="the nx" style="grid-column:1/-1"><span class="tde">HLV giao tập tiếp</span><q>${esc(c.can_tap)||'<span class="mo">Chưa ghi</span>'}</q>${c.nx?`<p class="mo" style="margin:8px 0 0">Nhận xét: ${esc(c.nx)}</p>`:""}</div>
