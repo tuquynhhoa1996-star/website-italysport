@@ -657,7 +657,7 @@ function khoiChoSan(h){
  const cd=D.cap_do,vt=cd.findIndex(c=>c.ma==h.cap_do),co=vt>=0,rd=h.radar&&typeof h.radar=="object"?h.radar:null;
  return `<div class="luoi hai" style="margin-top:12px">
  <div class="the"><span class="tde">Cấp độ${co?"":`<span class="cho">Chờ dữ liệu</span>`}</span>
- <div class="cap-do" style="--p:${co?vt/(cd.length-1):0}">${cd.map((c,i)=>`<div class="bac${i<vt?" qua":""}${i==vt?" on":""}${c.ma=="MVP"?" mvp":""}"><i>${ICON_CAP[i]||ICON_CAP[0]}</i><b>${esc(c.ma)}</b><small>${esc(c.mo_ta||"")}</small></div>`).join("")}</div>
+ <div class="cap-do" style="--p:${co?vt/(cd.length-1):0}">${cd.map((c,i)=>`<div class="bac${i<vt?" qua":""}${i==vt?" on":""}${c.ma=="MVP"?" mvp":""}"><i>${ICON_CAP[i]||ICON_CAP[0]}</i><b>${esc(c.ma)}</b></div>`).join("")}</div>
  <p class="mo nho" style="margin:0">${co?`Cấp hiện tại: <b style="color:var(--chanh)">${esc(tenCapDo(h))}</b>${cd[vt+1]?` &middot; Cấp tiếp theo: <b style="color:#fff">${esc(cd[vt+1].ten)}</b>`:" &middot; Cấp cao nhất của ITALY SPORT"}. Mỗi cấp có 4 bậc, HLV xếp sau mỗi giải, khoá học hoặc đợt kiểm tra.`:(h.xep_trang?esc(h.xep_trang)+". Khi HLV xếp cấp, cấp và bậc của bé sẽ sáng lên trên thang 4 cấp.":"HLV chưa xếp cấp cho bé. Khi có dữ liệu, cấp của bé sẽ sáng lên trên thang 4 cấp.")}</p></div>
  <div class="the"><span class="tde">Năng lực 9 nhóm${rd?"":`<span class="cho">Chờ dữ liệu</span>`}</span>${radar(rd)}
  <p class="mo nho" style="margin:0">${rd?"Thang 0-100 (mức 1-5 x 20), HLV chấm theo chuẩn cấp của bé.":"Biểu đồ 7 kỹ năng, thể lực và thái độ sẽ hiện sau lần HLV đánh giá kỳ đầu."}</p></div></div>`;
