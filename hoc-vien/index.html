@@ -375,9 +375,12 @@ html.nhung th,html.nhung .cap .m{background:#eef5ea;color:#2f4a38}
 html.nhung .ts{background:#eef5ea;color:#0E5A2A}
 html.nhung .tran,html.nhung .the,html.nhung .bang-wrap,html.nhung .cap,html.nhung .hang-hv,html.nhung .nb-the,html.nhung .thang div{box-shadow:0 3px 12px rgba(8,56,26,.07)}
 html.nhung .tran.le{background:#fffaf0;border-color:#ecd28a}
+body.nhung #login{min-height:0;padding:18px 14px 22px;align-items:flex-start}body.nhung .dn>img{width:64px}body.nhung .dn h1{font-size:22px;margin:8px 0 4px}body.nhung .dn .gt{display:none}body.nhung .dn>img{display:none}body.nhung .slogan{display:none}
+.cap-dau{margin:4px 0 2px;font-size:15px}.cap-dau b{color:var(--chanh);font-size:17px}
 </style>
 </head>
 <body class="khoa">
+<script>try{if(window.top!==window.self)document.body.classList.add("nhung")}catch(e){document.body.classList.add("nhung")}</script>
 <section id="login"><div class="dn">
  <img src="logo.png" alt="ITALY SPORT">
  <h1>Điểm năng lực <span>bóng rổ</span> ITALY SPORT</h1>
@@ -673,7 +676,7 @@ function khoiPhieu(h){
  const ky=(p.thang?"Tháng "+p.thang+"/":"Năm ")+(p.nam||"");
  const li=a=>a.map(k=>`<li>${esc(tenKN(k[1]))}</li>`).join("");
  const nx=(t,v)=>v?`<div class="the nx"><span class="tde">${t}</span><p style="margin:0">${esc(String(v).replace(/^[:\s]+/,""))}</p></div>`:"";
- return `<h2>Phiếu đánh giá khoá gần nhất<small>${esc(ky)}${p.hlv?" &middot; HLV "+esc(p.hlv):""}</small></h2>
+ return `<h2>Kết quả đánh giá gần nhất của con<small>${esc(ky)}${p.hlv?" &middot; HLV "+esc(p.hlv):""}</small></h2>
  <div class="the"><div style="display:flex;gap:16px;align-items:center;flex-wrap:wrap"><div><span class="k">Kỹ năng đã thành thạo</span> <b style="font-size:28px;color:var(--chanh);display:block">${dat.length}/${tong}</b></div>
  <div style="flex:1;min-width:160px"><div class="bar pk"><div style="width:${pt}%"></div></div><div class="mo nho" style="margin-top:6px">${p.cap_truoc?esc(p.cap_truoc)+" &rarr; ":""}<b>${esc(p.cap_sau||"")}</b></div></div></div></div>
  <div class="luoi hai" style="margin-top:12px"><div class="the"><span class="tde" style="color:var(--len)">Đã thành thạo (${dat.length})</span><ul class="ds-kn">${li(dat)||"<li class=mo>Chưa có</li>"}</ul></div>
@@ -687,15 +690,15 @@ function trangHV(ma){
  o+=`
  <section class="hero"><div class="ho-so-dau"><div class="vt">${esc(chuDau(h.ten))}</div><div>
  <span class="tag sap">${h.lua?esc(tenLua(h.lua)):"Chưa xếp lứa"}</span>${nhanVuot(h)}${h.vi_tri?`<span class="tag">${esc(h.vi_tri)}</span>`:""}${h.nghi?`<span class="tag nghi">Đã nghỉ</span>`:""}${nhanMau(h)}
- <h1>${esc(h.ten)}</h1><div class="mo nho">Mã ${esc(h.ma)}${h.nam?" &middot; Sinh "+h.nam:" &middot; Chưa có năm sinh"}${h.co_so?" &middot; "+esc(h.co_so):""}${h.sdt?"<br>SĐT phụ huynh "+esc(h.sdt):""}</div></div></div>`;
- if(!c)return o+`</section>${khoiChoSan(h)}${khoiPhieu(h)}${khoiGiaiTG(h)}<div class="the" style="margin-top:12px;text-align:center;padding:30px"><span class="tde" style="color:var(--chanh)">${h.phieu?"Điểm năng lực 0-100 sắp có":"Đang chờ HLV đánh giá kỳ đầu"}</span><p class="mo" style="margin:0">${h.phieu?"Phiếu đánh giá ở trên là kết quả khoá gần nhất.":"Bé chưa có lần đánh giá nào trong sổ điểm."} Hồ sơ, điểm năng lực và biểu đồ tiến bộ sẽ hiện ngay sau lần HLV đánh giá đầu tiên (sau giải đấu, khoá học hoặc đợt kiểm tra).</p></div>`;
+ <h1>${esc(h.ten)}</h1>${tenCapDo(h)?`<div class="cap-dau">Cấp hiện tại: <b>${esc(tenCapDo(h))}</b></div>`:""}<div class="mo nho">Mã ${esc(h.ma)}${h.nam?" &middot; Sinh "+h.nam:" &middot; Chưa có năm sinh"}${h.co_so?" &middot; "+esc(h.co_so):""}${h.sdt?"<br>SĐT phụ huynh "+esc(h.sdt):""}</div></div></div>`;
+ if(!c)return o+`</section>${khoiPhieu(h)}${khoiChoSan(h)}${khoiGiaiTG(h)}<div class="the" style="margin-top:12px;text-align:center;padding:30px"><span class="tde" style="color:var(--chanh)">${h.phieu?"Điểm năng lực 0-100 sắp có":"Đang chờ HLV đánh giá kỳ đầu"}</span><p class="mo" style="margin:0">${h.phieu?"Phiếu đánh giá ở trên là kết quả khoá gần nhất.":"Bé chưa có lần đánh giá nào trong sổ điểm."} Hồ sơ, điểm năng lực và biểu đồ tiến bộ sẽ hiện ngay sau lần HLV đánh giá đầu tiên (sau giải đấu, khoá học hoặc đợt kiểm tra).</p></div>`;
  o+=`<div class="bang-diem">${vong(c.diem)}<div class="chi-so"><div><span class="k">Mức năng lực</span><span class="tag muc" style="font-size:14px">${esc(c.muc)}</span></div>
  <div><span class="k">Hạng trong lứa ${h.lua?esc(tenLua(h.lua)):""}</span><b>${h.hang||"-"}</b></div>
  ${h.cap_do?`<div><span class="k">Cấp độ</span><b style="font-size:18px;color:var(--chanh)">${esc(tenCapDo(h))}</b></div>`:""}</div>
  <div style="grid-column:1/-1;min-width:0" class="tru-o">${barTru(c.goc,tr&&tr.goc)}</div></div>
  <p class="mo nho" style="margin:8px 0 0">Chấm ngày ${fd(c.ngay)} &middot; ${esc(c.loai)}: ${esc(c.dot)}${c.hlv?" &middot; HLV "+esc(c.hlv):""}</p></section>`;
  if(h.vuot)o+=`<div class="canh"><b>Chơi vượt lên ${esc(tenLua(h.vuot))}.</b> Điểm năng lực ${c.diem} chấm theo chuẩn ${esc(tenLua(h.lua))}. Điểm quy đổi khi xếp đội ${esc(tenLua(h.vuot))}: <b>${quyDoi(h)}</b> (= ${c.diem} x ${soVN(h.he_so)}, bé nhỏ hơn ${h.tuoi_nho} tuổi so với năm sinh nhỏ nhất của ${esc(tenLua(h.vuot))}).${h.vuot_gc?`<br>HLV ghi chú: ${esc(h.vuot_gc)}`:""}</div>`;
- o+=khoiChoSan(h);o+=khoiPhieu(h);o+=khoiGiaiTG(h);
+ o+=khoiPhieu(h);o+=khoiChoSan(h);o+=khoiGiaiTG(h);
  const xs=D.tru.map(t=>[t.ma,c.goc[t.ma]]).sort((a,b)=>b[1]-a[1]);
  o+=`<h2>Nhận xét của HLV</h2><div class="luoi hai">
  <div class="the nx" style="grid-column:1/-1"><span class="tde">HLV giao tập tiếp</span><q>${esc(c.can_tap)||'<span class="mo">Chưa ghi</span>'}</q>${c.nx?`<p class="mo" style="margin:8px 0 0">Nhận xét: ${esc(c.nx)}</p>`:""}</div>
