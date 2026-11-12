@@ -231,7 +231,7 @@ td.so,th.so{text-align:center;padding-left:4px;padding-right:4px}
 .lan .dau-lan .diem-o b{font-size:28px}
 .lan .bon{display:grid;grid-template-columns:1fr 1fr;gap:6px 14px;margin-top:10px;padding-top:10px;border-top:1px solid var(--vien);font-size:13.5px}
 .lan .bon div{display:flex;justify-content:space-between;gap:6px}
-.lan .bon span{color:var(--mo)}.lan .bon b{white-space:nowrap}
+.lan .cach-tinh{margin:8px 0 0;line-height:1.5}.lan .bon span{color:var(--mo)}.lan .bon b{white-space:nowrap}
 .nx{border-left:4px solid var(--chanh)}
 .nx q{display:block;font-size:16px;quotes:none;margin-top:4px}
 
@@ -708,7 +708,7 @@ function trangHV(ma){
  <div class="the"><span class="tde">Cần cải thiện</span><b style="font-size:20px;color:var(--do)">${esc(tenTru(xs[xs.length-1][0]))}</b><div class="mo nho">${xs[xs.length-1][1]} điểm</div></div></div>
  <h2>Biểu đồ tiến bộ<small>${n} lần chấm</small></h2><div class="the">${bieuDo(h.ls)}</div>
  <h2>Lịch sử chấm</h2><div class="lan">${[...h.ls].reverse().map((x,i,a)=>{const tc=a[i+1];return `<div class="the"><div class="dau-lan"><div><b>${fd(x.ngay)}</b> <span class="tag">${esc(x.loai)}</span><div class="mo nho">${esc(x.dot)}${x.hlv?" &middot; HLV "+esc(x.hlv):""}</div></div><div class="diem-o"><b>${x.diem}</b><small>${esc(x.muc)}</small></div></div>
- <div class="bon">${D.tru.map(t=>{const d=tc?x.goc[t.ma]-tc.goc[t.ma]:0;return `<div><span>${esc(t.ten)}</span><b>${x.goc[t.ma]}${d?` <small class="${d>0?"len":"xuong"}">${d>0?"+":""}${d}</small>`:""}</b></div>`}).join("")}</div>${moi(x.nx)?`<p class="mo nho" style="margin:8px 0 0">HLV: ${esc(x.nx)}</p>`:""}</div>`}).join("")}</div>
+ <div class="bon">${D.tru.map(t=>{const d=tc?x.goc[t.ma]-tc.goc[t.ma]:0;return `<div><span>${esc(t.ten)}</span><b>${x.goc[t.ma]}${d?` <small class="${d>0?"len":"xuong"}">${d>0?"+":""}${d}</small>`:""}</b></div>`}).join("")}</div>${cachTinh(x)}${moi(x.nx)?`<p class="mo nho" style="margin:8px 0 0">HLV: ${esc(x.nx)}</p>`:""}</div>`}).join("")}</div>
  <h2>Chi tiết lần chấm gần nhất<small>HLV chấm mỗi tiêu chí 1-${D.thang||10}, so với chuẩn cấp ${esc(c.cap||h.cap_do||"")}</small></h2><div class="luoi hai">${(()=>{let i=0;return D.tru.map(t=>`<div class="the"><span class="tde">${esc(t.ten)}</span>${t.tc.map(k=>{const v=c.tc[i++];return `<div class="tru"><span class="mo">${esc(k)}</span><div class="bar"><div style="width:${v*100/(D.thang||10)}%"></div></div><b>${v}</b></div>`}).join("")}</div>`).join("")})()}</div>`;
  if(h.tl.length){const f=h.tl[0],l=h.tl[h.tl.length-1],tot=(D.test_it||[true,false,false,false]).map(x=>x?-1:1);
   o+=`<h2>Kiểm tra thể lực</h2><div class="bang-wrap"><table><tr><th>Bài đo</th><th class="so">Đầu<br>${fd(f.ngay).slice(0,5)}</th><th class="so">Mới<br>${fd(l.ngay).slice(0,5)}</th><th class="so">Đổi</th></tr>${D.test.map((t,i)=>{const a=f.kq[i],b=l.kq[i];if(a==null&&b==null)return "";const d=a!=null&&b!=null&&h.tl.length>1?+(b-a).toFixed(2):null;
@@ -807,6 +807,9 @@ async function moSdt(sdt){
 function trangCon(){
  return `<h2>Các con của tôi<small>Bấm vào tên con để xem hồ sơ và điểm năng lực</small></h2><div class="ds-hv">${D.hoc_vien.map(h=>`<a class="hang-hv khong-hang" href="#/hv/${h.ma}"><div class="tt"><b>${esc(h.ten)}</b> <span class="tag">${h.lua?esc(tenLua(h.lua)):"Chưa xếp lứa"}</span>${h.nghi?`<span class="tag nghi">Đã nghỉ</span>`:""}<small>${phu(h)}</small></div><div class="diem-o">${h.diem!=null?`<b>${h.diem}</b><small>${h.hang?"hạng "+h.hang:""}</small>`:`<span class="tag chua">Đang chờ HLV đánh giá kỳ đầu</span>`}</div></a>`).join("")}</div>`;
 }
+/* chu thich cach tinh diem tong o Lich su cham (13/11/2026) */
+function cachTinh(x){if(!x.goc||!D.tru.length||!D.tru.every(t=>t.w&&x.goc[t.ma]!=null))return "";const s=D.tru.reduce((a,t)=>a+x.goc[t.ma]*t.w,0);const mk=(D.muc||[]).filter(m=>m[0]>0).sort((a,b)=>a[0]-b[0]).map(m=>`${m[0]} ${esc(m[1])}`).join(", ");
+ return `<p class="mo nho cach-tinh">Cách tính ${x.diem} điểm: ${D.tru.map(t=>`${esc(t.ten)} ${x.goc[t.ma]} &times; ${Math.round(t.w*100)}%`).join(" + ")} ${Math.round(s)==x.diem?"=":"&asymp;"} ${x.diem}.${mk?` Mốc xếp loại: từ ${mk}.`:""}</p>`}
 function moWeb(d){D=d;hvTinh();document.body.classList.toggle("ph",!!d.chiCon);$("#navhome").textContent=d.chiCon?(d.hoc_vien.length>1?"Các con":"Hồ sơ của con"):"Trang chủ";$("#hl").textContent=d.hotline;$("#cn").textContent=d.cap_nhat;document.body.classList.remove("khoa");cu=location.hash;ve()}
 async function dangNhap(e){
  e&&e.preventDefault();const v=$("#mk").value.trim(),nut=$("#nutdn"),loi=$("#loidn");if(!v)return;
