@@ -669,7 +669,7 @@ function khoiGiaiTG(h){
  if(!h.giai_tg||!h.giai_tg.length)return "";
  return `<h2>Giải đã được ghi danh</h2><div class="the"><div class="tt-giai">${h.giai_tg.map(g=>`<div><span>${esc(g.nam)}</span><div><b>${esc(g.vai)}</b><div class="mo nho">${esc(g.giai)} &middot; <a href="../${esc(g.trang)}" target="_top">xem giải</a></div></div></div>`).join("")}</div><p class="mo nho" style="margin:8px 0 0">Chỉ hiện giải đã công bố công khai và khớp chắc chắn với họ tên của bé. <a href="../vinh-danh.html" target="_top">Trang Vinh danh</a></p></div>`
 }
-function tenKN(t){t=String(t||"");const i=t.indexOf("/ ");return (i>0?t.slice(i+2):t).replace(/\s+/g," ").trim()}
+function tenKN(t){t=String(t||"");const i=t.indexOf("/ ");return (i>0?t.slice(i+2):t).replace(/\s*\(lần \d+, cần đặt lại tên\)/,"").replace(/\s+/g," ").trim()}
 function khoiPhieu(h){
  const p=h.phieu;if(!p||!p.kn||!p.kn.length)return "";
  const dat=p.kn.filter(k=>k[0]),chua=p.kn.filter(k=>!k[0]),tong=p.kn.length,pt=Math.round(dat.length*100/tong);
@@ -700,13 +700,15 @@ function trangHV(ma){
  if(h.vuot)o+=`<div class="canh"><b>Chơi vượt lên ${esc(tenLua(h.vuot))}.</b> Điểm năng lực ${c.diem} chấm theo chuẩn ${esc(tenLua(h.lua))}. Điểm quy đổi khi xếp đội ${esc(tenLua(h.vuot))}: <b>${quyDoi(h)}</b> (= ${c.diem} x ${soVN(h.he_so)}, bé nhỏ hơn ${h.tuoi_nho} tuổi so với năm sinh nhỏ nhất của ${esc(tenLua(h.vuot))}).${h.vuot_gc?`<br>HLV ghi chú: ${esc(h.vuot_gc)}`:""}</div>`;
  o+=khoiPhieu(h);o+=khoiChoSan(h);o+=khoiGiaiTG(h);
  const xs=D.tru.map(t=>[t.ma,c.goc[t.ma]]).sort((a,b)=>b[1]-a[1]);
+ const pz=h.phieu||{},chuan=t=>String(t||"").replace(/\s+/g," ").trim(),daCo=new Set([pz.nx_y,pz.nx_cm,pz.mt_y,pz.mt_cm].map(chuan).filter(Boolean)),moi=t=>chuan(t)&&!daCo.has(chuan(t));
+ const ctap=moi(c.can_tap)?c.can_tap:"",cnx=moi(c.nx)?c.nx:"";
  o+=`<h2>Nhận xét của HLV</h2><div class="luoi hai">
- <div class="the nx" style="grid-column:1/-1"><span class="tde">HLV giao tập tiếp</span><q>${esc(c.can_tap)||'<span class="mo">Chưa ghi</span>'}</q>${c.nx?`<p class="mo" style="margin:8px 0 0">Nhận xét: ${esc(c.nx)}</p>`:""}</div>
+ ${ctap||cnx||!h.phieu?`<div class="the nx" style="grid-column:1/-1"><span class="tde">HLV giao tập tiếp</span><q>${esc(ctap)||'<span class="mo">Chưa ghi</span>'}</q>${cnx?`<p class="mo" style="margin:8px 0 0">Nhận xét: ${esc(cnx)}</p>`:""}</div>`:""}
  <div class="the"><span class="tde">Mạnh nhất</span><b style="font-size:20px;color:var(--len)">${esc(tenTru(xs[0][0]))}</b><div class="mo nho">${xs[0][1]} điểm</div></div>
  <div class="the"><span class="tde">Cần cải thiện</span><b style="font-size:20px;color:var(--do)">${esc(tenTru(xs[xs.length-1][0]))}</b><div class="mo nho">${xs[xs.length-1][1]} điểm</div></div></div>
  <h2>Biểu đồ tiến bộ<small>${n} lần chấm</small></h2><div class="the">${bieuDo(h.ls)}</div>
  <h2>Lịch sử chấm</h2><div class="lan">${[...h.ls].reverse().map((x,i,a)=>{const tc=a[i+1];return `<div class="the"><div class="dau-lan"><div><b>${fd(x.ngay)}</b> <span class="tag">${esc(x.loai)}</span><div class="mo nho">${esc(x.dot)}${x.hlv?" &middot; HLV "+esc(x.hlv):""}</div></div><div class="diem-o"><b>${x.diem}</b><small>${esc(x.muc)}</small></div></div>
- <div class="bon">${D.tru.map(t=>{const d=tc?x.goc[t.ma]-tc.goc[t.ma]:0;return `<div><span>${esc(t.ten)}</span><b>${x.goc[t.ma]}${d?` <small class="${d>0?"len":"xuong"}">${d>0?"+":""}${d}</small>`:""}</b></div>`}).join("")}</div>${x.nx?`<p class="mo nho" style="margin:8px 0 0">HLV: ${esc(x.nx)}</p>`:""}</div>`}).join("")}</div>
+ <div class="bon">${D.tru.map(t=>{const d=tc?x.goc[t.ma]-tc.goc[t.ma]:0;return `<div><span>${esc(t.ten)}</span><b>${x.goc[t.ma]}${d?` <small class="${d>0?"len":"xuong"}">${d>0?"+":""}${d}</small>`:""}</b></div>`}).join("")}</div>${moi(x.nx)?`<p class="mo nho" style="margin:8px 0 0">HLV: ${esc(x.nx)}</p>`:""}</div>`}).join("")}</div>
  <h2>Chi tiết lần chấm gần nhất<small>HLV chấm mỗi tiêu chí 1-${D.thang||10}, so với chuẩn cấp ${esc(c.cap||h.cap_do||"")}</small></h2><div class="luoi hai">${(()=>{let i=0;return D.tru.map(t=>`<div class="the"><span class="tde">${esc(t.ten)}</span>${t.tc.map(k=>{const v=c.tc[i++];return `<div class="tru"><span class="mo">${esc(k)}</span><div class="bar"><div style="width:${v*100/(D.thang||10)}%"></div></div><b>${v}</b></div>`}).join("")}</div>`).join("")})()}</div>`;
  if(h.tl.length){const f=h.tl[0],l=h.tl[h.tl.length-1],tot=(D.test_it||[true,false,false,false]).map(x=>x?-1:1);
   o+=`<h2>Kiểm tra thể lực</h2><div class="bang-wrap"><table><tr><th>Bài đo</th><th class="so">Đầu<br>${fd(f.ngay).slice(0,5)}</th><th class="so">Mới<br>${fd(l.ngay).slice(0,5)}</th><th class="so">Đổi</th></tr>${D.test.map((t,i)=>{const a=f.kq[i],b=l.kq[i];if(a==null&&b==null)return "";const d=a!=null&&b!=null&&h.tl.length>1?+(b-a).toFixed(2):null;
