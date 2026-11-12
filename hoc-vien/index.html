@@ -755,7 +755,7 @@ function trangCach(){
  <p class="mo nho" style="margin-top:12px">Mỗi tiêu chí HLV chấm 1-${D.thang||5}: 1 chưa làm được, 2 đang tập, 3 đạt chuẩn cấp, 4 vững, 5 vượt chuẩn.</p>
  <h2>Mức năng lực</h2>
  <div class="thang">${D.muc.map(([d,m])=>`<div><b>${d}+</b>${esc(m)}</div>`).join("")}</div>
- <h2>7 bài test đo bằng số</h2>
+ <h2>${D.test.length} bài test đo bằng số</h2>
  <div class="the"><ul class="ds">${D.test.map(t=>`<li>${esc(t)}</li>`).join("")}</ul>
  <p class="mo nho" style="margin:10px 0 0">Số đo ghi riêng, không cộng vào điểm năng lực, dùng để xét lên cấp và để con so với chính mình lần trước.</p></div>
  <p class="mo nho" style="margin-top:12px">Tham khảo lộ trình 4 cấp của khung Jr. NBA. Bộ tiêu chí, mô tả và mốc test do ITALY SPORT tự soạn.</p>`;
